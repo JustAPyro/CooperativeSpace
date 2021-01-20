@@ -264,7 +264,8 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		isFriendly = true;
 		
 		setOffers(new Offer(1, new Material(MaterialType.OXYGEN), 2, new Material(MaterialType.OXYGEN)),
-				  new Offer(2, new Material(MaterialType.CARBON), 1, new Material(MaterialType.OXYGEN)));
+				  new Offer(2, new Material(MaterialType.CARBON), 1, new Material(MaterialType.OXYGEN)),
+				  new Offer(2, new Material(MaterialType.CARBON), 1, new Money()));
 
 		hangerMenu.linkPlanet(this);
 		repairMenu.linkPlanet(this);
@@ -355,7 +356,6 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 				return secondaryStorage;
 			} 
 			else {
-				System.out.println("ERROR: Called search for invalid resource: " + target.toString());
 				return -1;
 			}
 		}
