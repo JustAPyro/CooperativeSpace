@@ -1,5 +1,7 @@
 package ships;
 
+import inventory.Itemizable;
+
 public class Fighter extends Ship{
 	
 	public Fighter() {
@@ -9,6 +11,14 @@ public class Fighter extends Ship{
 		setForwardPower(0.1);
 		setTurningPower(3);
 			
+	}
+
+	@Override
+	public boolean stacksWith(Itemizable item) {
+		if (item.getClass().equals(this.getClass()))
+			return true;
+		else
+			return false;
 	}
 	
 }

@@ -2,6 +2,7 @@ package ships;
 
 import application.Focusable;
 import application.Player;
+import inventory.Itemizable;
 
 public class Protector extends Ship implements Focusable{
 
@@ -31,5 +32,15 @@ public class Protector extends Ship implements Focusable{
 	public double getY() {
 		return getPlayer().getY();
 	}
+
+	@Override
+	public boolean stacksWith(Itemizable item) {
+		if (item.getClass().equals(this.getClass()))
+			return true;
+		else
+			return false;
+	}
+	
+	
 	
 }
