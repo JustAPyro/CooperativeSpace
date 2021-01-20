@@ -81,7 +81,7 @@ public class Game{
 		earth.setSecondaryMax(200);
 		earth.setMaxHealth(1000);
 		earth.setHealth(1000);
-		earth.setOffers(new Offer(1, new Material(MaterialType.OXYGEN), 2, new Money()), new Offer(3, new Material(MaterialType.CARBON), 2, new Money()));
+		//earth.setOffers(new Offer(1, new Material(MaterialType.OXYGEN), 2, new Money()), new Offer(3, new Material(MaterialType.CARBON), 2, new Money()));
 
 		ScreenFocus.setScreenFocus(earth);
 		

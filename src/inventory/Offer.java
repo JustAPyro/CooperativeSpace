@@ -40,7 +40,7 @@ public class Offer {
 	
 	// Execute the offer based on current input and output quantity
 	public void execute() {
-		//System.out.println("Executing offer: " + this.toString());
+		System.out.println("Executing offer: " + this.toString());
 		InventoryAdv.addItem(output, outputQuantity);
 		InventoryAdv.addItem(input, inputQuantity * -1);
 		
