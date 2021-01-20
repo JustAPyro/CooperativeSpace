@@ -42,6 +42,10 @@ public class Material implements Itemizable{
 		return type.toString(); // Return type of material
 	}
 	
+	private MaterialType getMaterial() {
+		return type;
+	}
+	
 	private String getType() {
 		if (type == MaterialType.ALUMINUM) {
 			return "Al";
@@ -73,6 +77,15 @@ public class Material implements Itemizable{
 	@Override
 	public ItemCategory getCategory() {
 		return ItemCategory.MATERIAL;
+	}
+
+	@Override
+	public boolean stacksWith(Itemizable item) {
+		// First check if item is a material, (Single & doesn't execute second part if first is false)
+		if (item instanceof Material & this.getMaterial() == ((Material) item).getMaterial()) { // Then check if the MaterialType of both is equal
+			return true;
+		}
+		return false;
 	}
 
 

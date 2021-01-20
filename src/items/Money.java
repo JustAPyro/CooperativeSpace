@@ -18,4 +18,12 @@ public class Money implements Itemizable{
 		return ItemCategory.MONEY;
 	}
 
+	@Override
+	public boolean stacksWith(Itemizable item) {
+		if (this.getClass().equals(item.getClass())) {
+			return true;
+		}
+		return false;
+	}
+
 }

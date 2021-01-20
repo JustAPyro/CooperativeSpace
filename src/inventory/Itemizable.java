@@ -14,5 +14,7 @@ public interface Itemizable {
 	// All items must have a getCategory function that returns their ItemCategory
 	public abstract ItemCategory getCategory();
 	
+	public abstract boolean stacksWith(Itemizable item);
+	
 }
 
