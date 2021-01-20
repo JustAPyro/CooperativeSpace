@@ -40,8 +40,9 @@ public class Offer {
 	
 	// Execute the offer based on current input and output quantity
 	public void execute() {
-		
-		// TODO: Fix this execute function to actually do trade based on inventory
+		//System.out.println("Executing offer: " + this.toString());
+		InventoryAdv.addItem(output, outputQuantity);
+		InventoryAdv.addItem(input, inputQuantity * -1);
 		
 	}
 	
@@ -67,7 +68,9 @@ public class Offer {
 		}
 	}
 	
-	
+	public String toString() {
+		return inputQuantity + " of " + input.toString() + " for " + outputQuantity + " of " + output.toString();
+	}
 	
 	// Get method that returns the input item for offer
 	public Itemizable getInput() {
