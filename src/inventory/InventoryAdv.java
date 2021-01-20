@@ -70,6 +70,11 @@ public class InventoryAdv {
 	// Method to add an item with a specific quantity
 	public static void addItem(Itemizable item, Integer itemQuantity) {
 
+		if (item.getCategory() == ItemCategory.MONEY) { 
+			money = money + itemQuantity;
+			return;
+		}
+		
 		// Check each item
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).stacksWith(item)) { // If these two items stack together
