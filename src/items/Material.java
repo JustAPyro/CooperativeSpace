@@ -79,13 +79,15 @@ public class Material implements Itemizable{
 		return ItemCategory.MATERIAL;
 	}
 
-	@Override
+	@Override // Method determines if Item can stack with this item
 	public boolean stacksWith(Itemizable item) {
-		// First check if item is a material, (Single & doesn't execute second part if first is false)
-		if (item instanceof Material & this.getMaterial() == ((Material) item).getMaterial()) { // Then check if the MaterialType of both is equal
-			return true;
+		
+		if (item instanceof Material) {  // First check if item is a material
+			if (this.getMaterial() == ((Material) item).getMaterial()) { // Then check if the MaterialType of both is equal
+				return true; // If it is, these are the same type of item, and can stack
+			}
 		}
-		return false;
+		return false; // If not, they cannot stack
 	}
 
 
