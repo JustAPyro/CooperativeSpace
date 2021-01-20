@@ -1,6 +1,5 @@
 package menu;
 
-import application.Trade;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -21,7 +20,6 @@ public class MenuLabel extends MenuElement implements Selectable{
 	boolean selectable = false;
 	Color fontColor = Color.BLACK;
 	Color selectFillColor = Color.RED;
-	Trade trade;
 	
 	
 	public MenuLabel(MainMenu main, Align align, String text, int fontSize, FontWeight fontWeight, int width, int height) {
@@ -59,20 +57,16 @@ public class MenuLabel extends MenuElement implements Selectable{
 		
 	}
 	
-	public Trade getTrade() {
-		return trade;
-	}
+
 	
 	// Implements a trade value
-	public MenuLabel(MainMenu main, Align align, Trade trade, boolean selectable, int fontSize, int width, int height) {
+	public MenuLabel(MainMenu main, Align align, boolean selectable, int fontSize, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.elementFillColor = Color.BLACK;
 		this.elementStrokeColor = Color.BLACK;
 		this.x = main.x + main.getHorizontalBuffer();
 		this.y = main.getNextY();
-		this.trade = trade;
-		this.text = trade.toString();
 		this.name = text;
 		this.fontSize = fontSize;
 		this.align = align;
