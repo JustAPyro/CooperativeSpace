@@ -69,8 +69,20 @@ public class InventoryAdv {
 	
 	// Method to add an item with a specific quantity
 	public static void addItem(Itemizable item, Integer itemQuantity) {
+
+		// Check each item
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).stacksWith(item)) { // If these two items stack together
+				quantity.set(i, quantity.get(i) + itemQuantity); // Add the quantity to the quantity section
+				return; // And return, job done
+			}
+		}
+		
+		// If we don't already find a stck to add to
 		items.add(item);			// Add item
 		quantity.add(itemQuantity);	// Add the desired quantity
+
+		
 	}
 	
 	// Method to collect resources from a planet
