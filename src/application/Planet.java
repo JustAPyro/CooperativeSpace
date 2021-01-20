@@ -479,7 +479,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 			menuOffers.add(new MenuOffer(sellMenu, allOffers.get(i)) {
 				@Override // Override the select function
 				public void select() {
-					this.getOffer().execute(10);
+					this.getOffer().execute(); // execute the offer associated with this display
 				}
 			});
 		}
