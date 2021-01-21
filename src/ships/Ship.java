@@ -20,6 +20,9 @@ public abstract class Ship implements Itemizable{
 	private double forwardPower;
 	private double turningPower;
 	
+	private double health;
+	private double maxHealth;
+	
 	// Image for drawing ship
 	private Image shipImage;
 	
@@ -56,6 +59,36 @@ public abstract class Ship implements Itemizable{
 	// Get turning power
 	public double getTurningPower() {
 		return turningPower;
+	}
+	
+	// Set health
+	public void setHealth(double health) {
+		this.health = health;
+	}
+	
+	// Gets health
+	public double getHealth() {
+		return health;
+	}
+	
+	// Sets max health
+	public void setMaxHealth(double maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+	
+	// Gets max health
+	public double getMaxHealth() {
+		return maxHealth;
+	}
+	
+	// Sets the health to a percent based on current maxHealth
+	public void setHealthPercent(double percent) {
+		health = (percent/100)*maxHealth;
+	}
+	
+	// Gets health as a percent based on current maxHealth
+	public double getHealthPercent() {
+		return (health/maxHealth)*100;
 	}
 	
 	// OVERLOAD: SetShipImage: String, FileInputStream, Image
