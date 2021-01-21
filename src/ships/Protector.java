@@ -40,6 +40,11 @@ public class Protector extends Ship implements Focusable{
 		else
 			return false;
 	}
+
+	@Override
+	public String getDescription() {
+		return "A protector ship: Capable of claiming screen focus for long distance travel and armed with support weaponry this is a great addition to any fleet despite it's lower speed and manueverability.";
+	}
 	
 	
 	

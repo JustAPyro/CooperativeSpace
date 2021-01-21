@@ -20,6 +20,12 @@ public class Fighter extends Ship{
 		else
 			return false;
 	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

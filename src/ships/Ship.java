@@ -109,6 +109,9 @@ public abstract class Ship implements Itemizable{
 		gc.restore();
 	}
 	
+	// Returns a string that's a description of the ship!
+	public abstract String getDescription();
+	
 	// Returns the type of item this is
 	public ItemCategory getCategory() {
 		return ItemCategory.SHIP; // Return that this is a ship item
