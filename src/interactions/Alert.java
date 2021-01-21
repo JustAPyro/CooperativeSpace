@@ -34,10 +34,13 @@ public class Alert {
 	
 	public void draw(GraphicsContext gc) {
 		
-		if (displayTime < 0)
+		if (displayTime <= 0 && opacityPulse <= 0)
 			return;
 		
-		opacityPulse = (100-pulseHeight+Math.sin(displayTime/pulseHeight)*pulseHeight)/100;
+		if (displayTime < 0)
+			opacityPulse -= 0.01;
+		else
+			opacityPulse = (100-pulseHeight+Math.sin(displayTime/pulseHeight)*pulseHeight)/100;
 
 		gc.save();
 		
