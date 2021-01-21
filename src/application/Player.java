@@ -2,19 +2,23 @@ package application; // Package with Applications
 
 import java.util.LinkedList; 				// Linked List for interaction objects
 
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext; // Graphics Context for extra drawing
 import javafx.scene.input.KeyCode;			// KeyCode for key binding values
 import javafx.scene.input.KeyEvent;			// KeyEvent to handle inputs
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import menu.MainMenu;
 import ships.Protector;
 import ships.Ship;
 import inventory.InventoryAdv;
 
-public class Player extends Sprite{
+public class Player extends Sprite implements TakesDamage{
 
 	//Player Info
 	private String name = "Luke"; // Name
+	private Paint playerColor = Color.DARKRED;
 	
 	//player game play information
 	private int shotSpeed = 10;			// Flying Speed of attacks
@@ -42,6 +46,9 @@ public class Player extends Sprite{
 	private Boolean secondaryPressed;
 	private Boolean inventoryPressed;
 	
+	private int drawGUIx = 30;
+	private int drawGUIy = 30;
+	
 	private Ship ship;
 	
 	// Standard No-Argument Constructor
@@ -62,6 +69,12 @@ public class Player extends Sprite{
 		backwardPressed = false;
 	}
 	
+	// Gets the current ship
+	public Ship getShip() {
+		return ship;
+	}
+
+	
 	// Standard No-Argument Constructor
 	public Player(Canvas gameCanvas, Ship ship) {
 		this.ship = ship;
@@ -73,6 +86,8 @@ public class Player extends Sprite{
 		xVel = 0;		// cancel x velocity
 		yVel = 0;		// cancel y velocity
 		orientation = 0;// Start orientation at 0 (Facing directly up)
+		
+		isFriendly = true; // Set to friendly so people can't shoot themselves
 		
 		// Set all key presses to false on creation
 		inventoryPressed = false;
@@ -111,6 +126,16 @@ public class Player extends Sprite{
 		} 
 	}
 
+	// Returns the player name
+	public String getName() {
+		return name;
+	}
+	
+	// Returns the player color
+	public Paint getPlayerColor() {
+		return playerColor;
+	}
+	
 	// Adjusts the booleans on key press
 	public void inputPressed(KeyEvent event) {
 		
@@ -143,6 +168,14 @@ public class Player extends Sprite{
 	@Override
 	public String getType() {
 		return "Player";
+	}
+	
+	public int getGUIx() {
+		return drawGUIx;
+	}
+	
+	public int getGUIy() {
+		return drawGUIy;
 	}
 	
 	// Fires the main weapon
@@ -194,7 +227,7 @@ public class Player extends Sprite{
 			if (inventoryPressed) { Inventory.toggle(); InventoryAdv.toggle(); inventoryPressed = false; }
 			
 			// As well as drawing the player HUD
-			drawHUD(gameCanvas.getGraphicsContext2D());
+			//drawHUD(gameCanvas.getGraphicsContext2D());
 		}
 		
 		//Otherwise, if the player is landed use the planetary interface controls (pi.)
@@ -260,5 +293,10 @@ public class Player extends Sprite{
 		planet.landed.clear(); 
 		planet = null;
 		
+	}
+
+	@Override
+	public void Damage(double dmg) {
+		ship.changeHealth(dmg * -1);
 	}
 }

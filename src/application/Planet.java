@@ -395,11 +395,10 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		
 
 		MenuLabel menuShipItem = new MenuLabel(shopMenu, Align.LEFT, "Ship: Protector", true, 24, 10, 40) {
+			Offer offer = new Offer(100, new Money(), 1, new Protector()); // Assign an offer to the label button
 			@Override
-			public void select() {
-				if (Inventory.withdraw(Resource.MONEY, 200))
-					Inventory.addShip(new Protector(landed.element()));
-						
+			public void select() { // If selected
+				offer.execute(); // Execute offer
 			}
 		};
 		new MenuToolTip(shopMenu, menuShipItem, "A protector ship: Capable of claiming screen focus for long distance travel and armed with support weaponry this is a great addition to any fleet despite it's lower speed and manueverability.");
@@ -701,6 +700,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	@Override
 	public void Damage(double dmg) {
 		
+		this.health = (int) (this.health - dmg);
 		
 	}
 

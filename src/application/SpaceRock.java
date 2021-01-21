@@ -64,9 +64,9 @@ public class SpaceRock extends Sprite implements TakesDamage {
 	
 	@Override
 	protected void handleCollisions(LinkedList<Sprite> collisions) {
-		for (Sprite col : collisions) {
-			if (col instanceof TakesDamage) {
-				((TakesDamage) col).Damage(0);
+		for (Sprite col : collisions) { // For each collisions
+			if (col instanceof TakesDamage) { // If the object implements TakesDamage
+				((TakesDamage) col).Damage(10); // cast to the class and call Damage() function passing in the damage this does
 				destroy();
 			}
 		}

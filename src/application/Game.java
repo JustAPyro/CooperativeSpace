@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
+import gui.GUI;
 import inventory.InventoryAdv;
 import inventory.Offer;
 import items.Material;
@@ -42,22 +43,27 @@ public class Game{
 		Canvas gameCanvas = new Canvas(screenSize.getWidth(), screenSize.getHeight());
 		GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 		
+		
 		Image back = new Image(new FileInputStream("./Resources/Images/space.png"));
 
 		// Setting up player 1 
 		Player p1 = new Player(gameCanvas, new Fighter()); //create p1 object
 		p1.setHotkeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.SPACE, KeyCode.E, KeyCode.Q); //set the players hotkeys (Might do this from savefile later)
+		GUI.getInstance().addPlayers(p1);
 		
 		InventoryAdv.setSize(50, 50, 4);
+		InventoryAdv.addMoney(100);
+		InventoryAdv.addItem(new Fighter());
+		
+		/*
 		InventoryAdv.addItem(new Material(MaterialType.ALUMINUM));
 		InventoryAdv.addItem(new Material(MaterialType.OXYGEN));
 		InventoryAdv.addItem(new Material(MaterialType.CARBON));
 		InventoryAdv.addItem(new Material(MaterialType.SILICON));
 		InventoryAdv.addItem(new Material(MaterialType.HYDROGEN));
-		InventoryAdv.addMoney(100);
 		InventoryAdv.addItem(new Fighter());
 		InventoryAdv.addItem(new Protector());
-		
+		*/
 		
 		Inventory.initalizeInventoryImages();
 		Inventory.addShip(new Fighter());
@@ -113,6 +119,8 @@ public class Game{
 				
 				Inventory.handleAndDraw(gc);
 				InventoryAdv.handleAndDraw(gc);
+				
+				GUI.getInstance().draw(gc);
 
 			}
 		};

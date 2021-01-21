@@ -52,10 +52,13 @@ public class MenuDisplay extends MenuElement implements Selectable, Scrollable{
 		this.height = height;
 		this.ships = ships;
 		scrolled = 0;
+		
 		displayIcon = ships.getFirst().getShipImage();
 		displayName = ships.getFirst().getShipName();
 		displaySpeed = ships.getFirst().getForwardPower();
 		displayTurn = ships.getFirst().getTurningPower();
+		
+		
 		main.add(this);
 		main.setScrolling(this);
 		

@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import ships.Ship;
 import items.Material;
 import items.Money;
 
@@ -39,6 +40,8 @@ public class InventoryAdv {
 	// TODO: Replace these data strctures with a Hash map and wrapping class to keep track of quantities
 	private static LinkedList<Itemizable> items = new LinkedList<Itemizable>(); // Linked list to keep track of item object
 	private static LinkedList<Integer> quantity = new LinkedList<Integer>();	// Linked list to keep track of quantity
+	
+	private static LinkedList<Ship> allShips = new LinkedList<Ship>();
 	
 	// Toggles the visibility of the inventory
 	public static void toggle() {
@@ -72,7 +75,6 @@ public class InventoryAdv {
 		if (item.getCategory() == ItemCategory.MONEY) { // If the item is money
 			if (money >= itemQuantity) { // check if we have enough money 
 				money = money - itemQuantity; // If we do, subtract that money
-				System.out.println("ITS A MONEY!");
 				return true; // Return true to confirm the remove was successful
 			}
 		}
@@ -93,11 +95,18 @@ public class InventoryAdv {
 		
 		
 	}
-	
+
+	public static LinkedList<Ship> getShips() {
+		return allShips;
+	}
 	
 	// Method to add an item with a specific quantity
 	public static void addItem(Itemizable item, Integer itemQuantity) {
-
+		if (item instanceof Ship) { // If it's a ship
+			allShips.add((Ship) item); // Lets add it to the ship list too to help track it
+		}
+		
+		
 		if (item.getCategory() == ItemCategory.MONEY) { 
 			money = money + itemQuantity;
 			return;

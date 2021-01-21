@@ -20,8 +20,8 @@ public abstract class Ship implements Itemizable{
 	private double forwardPower;
 	private double turningPower;
 	
-	private double health;
-	private double maxHealth;
+	private double health = 100;
+	private double maxHealth = 100;
 	
 	// Image for drawing ship
 	private Image shipImage;
@@ -59,6 +59,12 @@ public abstract class Ship implements Itemizable{
 	// Get turning power
 	public double getTurningPower() {
 		return turningPower;
+	}
+	
+	// Used to change health to avoid setHealth(getHealth() - 10)
+	public void changeHealth(double healthChange) {
+		System.out.println("Changing health from " + health + " to " + health + healthChange);
+		health = health + healthChange;
 	}
 	
 	// Set health
