@@ -3,6 +3,7 @@ package gui;
 import java.util.LinkedList;
 
 import application.Player;
+import interactions.Alert;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -16,6 +17,7 @@ public class GUI {
 
 	private static GUI instanceGUI = null;
 	
+	private Alert alert = new Alert("Warning! Astroids Incoming!", 300);
 	private LinkedList<Player> players = new LinkedList<Player>();
 	
 	private GUI() {
@@ -42,8 +44,14 @@ public class GUI {
 		}
 	}
 	
+	public void alert(String msg, int displayTime) {
+		alert = new Alert(msg, displayTime);
+	}
+	
 	public void draw(GraphicsContext gc) {
 		gc.save(); // Save the graphics brush
+		
+		alert.draw(gc);
 		
 		players.forEach(player -> drawPlayerGUI(player, gc));
 		
@@ -57,7 +65,6 @@ public class GUI {
 		
 		gc.save();
 		
-		//gc.strokeRect(x, y, 500, 500);
 		
 		gc.setFill(player.getPlayerColor()); gc.setStroke(Color.BLACK); // Set stroke and fill based on player color
 		gc.setFont(Font.font("veranda", FontWeight.BOLD, FontPosture.ITALIC, 26));
