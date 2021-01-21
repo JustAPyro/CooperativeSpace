@@ -56,6 +56,7 @@ public class SpaceRock extends Sprite implements TakesDamage {
 	}
 	
 	
+	
 
 	@Override
 	public String getType() {

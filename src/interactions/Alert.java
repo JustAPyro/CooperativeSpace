@@ -42,6 +42,13 @@ public class Alert {
 		else
 			opacityPulse = (100-pulseHeight+Math.sin(displayTime/pulseHeight)*pulseHeight)/100;
 
+		if (opacityPulse < 0) {
+			opacityPulse = 0;
+		}
+		else if (opacityPulse > 1) {
+			opacityPulse = 1;
+		}
+		
 		gc.save();
 		
 		gc.setFill(Color.rgb(255, 255, 0, opacityPulse));

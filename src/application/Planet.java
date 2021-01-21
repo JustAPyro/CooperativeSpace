@@ -295,6 +295,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		double elapsed = (timeStamp - expiredTimeStamp); elapsed = elapsed / Math.pow(10, 9);
 		expiredTimeStamp = timeStamp;
 		
+		/*
 		if (bombardment == 1) {
 			bombardment = 0;
 			bombardmentStart = System.currentTimeMillis();
@@ -303,6 +304,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 				if (chance < bombardmentDifficulty)
 					allSprites.add(new SpaceRock(gameCanvas, this, bombardmentSpeed, bombardmentSize));
 		}
+		*/
 				
 		incrementResources(elapsed);
 		

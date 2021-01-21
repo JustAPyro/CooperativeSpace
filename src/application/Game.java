@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
+import events.EventManager;
 import gui.GUI;
 import inventory.InventoryAdv;
 import inventory.Offer;
@@ -96,6 +97,7 @@ public class Game{
 		sprites.add(p1);
 		//sprites.add(p2);
 
+		EventManager.get();
 		
 		//animation timemr is used to animate things and run the game loop
 		AnimationTimer frame = new AnimationTimer() { //frame is the current game frame
@@ -119,7 +121,7 @@ public class Game{
 				
 				Inventory.handleAndDraw(gc);
 				InventoryAdv.handleAndDraw(gc);
-				
+				EventManager.get().update();
 				GUI.getInstance().draw(gc);
 
 			}
