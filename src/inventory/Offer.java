@@ -40,8 +40,15 @@ public class Offer {
 	
 	// Execute the offer based on current input and output quantity
 	public void execute() {
-		InventoryAdv.addItem(output, outputQuantity);
-		InventoryAdv.addItem(input, inputQuantity * -1);
+
+		Boolean hasResources = InventoryAdv.removeItem(input, inputQuantity); // If the player has the input remove it
+		System.out.println(hasResources);
+		if (hasResources) { // If they had the resources then
+			InventoryAdv.addItem(output, outputQuantity); // and add the output
+		}
+		else {
+			return; // Do nothing!
+		}
 		
 	}
 	

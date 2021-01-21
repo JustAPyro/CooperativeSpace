@@ -67,6 +67,34 @@ public class InventoryAdv {
 		quantity.add(1); // Add the quantity (Since unspecified we only add one)
 	}
 	
+	// Removes an item from inventory and then returns true. If players don't have the item, returns false
+	public static boolean removeItem(Itemizable item, Integer itemQuantity) {
+		if (item.getCategory() == ItemCategory.MONEY) { // If the item is money
+			if (money >= itemQuantity) { // check if we have enough money 
+				money = money - itemQuantity; // If we do, subtract that money
+				System.out.println("ITS A MONEY!");
+				return true; // Return true to confirm the remove was successful
+			}
+		}
+		
+		// Otherwise, if it's not money we need to check the inventory list
+		for (int i = 0; i < items.size(); i++) { // For each item in the list 
+			if (items.get(i).stacksWith(item)) { // If this is the item (or they're similar enough to stack)
+				int numOfItems = quantity.get(i); // Get how much the player has
+				if (numOfItems >= itemQuantity) { // If the player has more or equal to the amount
+					quantity.set(i, quantity.get(i) - itemQuantity); // Subtract the remove from that quantity
+					return true; // Return true to confirm it happened
+				}
+
+			}
+		}
+		
+		return false; // Otherwise, if none of the above works, the player must not have item, so return false
+		
+		
+	}
+	
+	
 	// Method to add an item with a specific quantity
 	public static void addItem(Itemizable item, Integer itemQuantity) {
 
