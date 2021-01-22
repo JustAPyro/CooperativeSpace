@@ -53,7 +53,6 @@ public class Offer {
 	public void execute() {
 
 		Boolean hasResources = InventoryAdv.removeItem(input, inputQuantity); // If the player has the input remove it
-		System.out.println(hasResources);
 		if (hasResources) { // If they had the resources then
 			InventoryAdv.addItem(output, outputQuantity); // and add the output
 		}

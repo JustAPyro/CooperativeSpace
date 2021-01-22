@@ -38,8 +38,18 @@ public class MenuOffer extends MenuElement implements Selectable, Scrollable{
 		// Set to drawing color
 		gc.setFill(Color.BLACK);
 		
+		// Set to drawing color
+		gc.setFill(Color.BLACK);
+		
+		// Set the font to an appropriate size to write quantities
+		gc.setFont(Font.font("veranda", FontWeight.BOLD, FontPosture.REGULAR, 16));
+		
+		// Set alignment center to draw centered quantities
+		gc.setTextAlign(TextAlignment.CENTER);
+		
 		// Draw the input item
 		offer.getInput().drawItemIcon(gc, x+height/2, y + vBuffer, height, height);
+		gc.fillText(Integer.toString(offer.getInputQuantity()), x+height/2, y + vBuffer + 27); // Drawing the input quantity
 		
 		// Generate and draw an arrow indicating conversion direction
 		int aw = 46;  int ah = 34; // Variables to make changing arrow position easy
@@ -48,6 +58,7 @@ public class MenuOffer extends MenuElement implements Selectable, Scrollable{
 		
 		// Draw the output item
 		offer.getOutput().drawItemIcon(gc, x+width-height/2, y + vBuffer, height, height);
+		gc.fillText(Integer.toString(offer.getOutputQuantity()), x+width-height/2, y + vBuffer + 27); // Drawing the output quantity
 		
 		// Return the gc to default value
 		gc.restore();
