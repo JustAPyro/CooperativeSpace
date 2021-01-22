@@ -26,6 +26,7 @@ import items.Money;
 
 import java.util.Random;
 
+import events.EventManager;
 import inventory.InventoryAdv;
 import inventory.Offer;
 
@@ -417,7 +418,13 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		MenuLabel ml5 = new MenuLabel(shopMenu, Align.LEFT, "MW: Boost", true, 24, 10, 40);
 		new MenuToolTip(shopMenu, ml5, "Main weapon upgrade: Boost. Increases main weapon damage.");
 		
-		MenuLabel ml6 = new MenuLabel(shopMenu, Align.LEFT, "Open Portal", true, 24, 10, 40);
+		Planet input = this;
+		MenuLabel ml6 = new MenuLabel(shopMenu, Align.LEFT, "Open Portal", true, 24, 10, 40) {
+			@Override
+			public void select() {
+				EventManager.get().startAstroidBombardment(input, 90);
+			}
+		};
 		new MenuToolTip(shopMenu, ml6, "Connect this planet with your portal network for fast travel.");
 		
 		MenuLabel ml7 = new MenuLabel(shopMenu, Align.LEFT, "Back", true, 24, 10, 40) {

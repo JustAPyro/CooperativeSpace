@@ -30,7 +30,7 @@ public class Game{
 	Stage window; //this is the actual window of the game (Kinda like a JFrame)
 	Scene scene; //This is the scene that's currently displayed in the window
 	GraphicsContext gc;
-
+	long lastTimeStamp = 0;
 	
 	
 	LinkedList<Sprite> sprites = new LinkedList<Sprite>();
@@ -44,7 +44,8 @@ public class Game{
 		Canvas gameCanvas = new Canvas(screenSize.getWidth(), screenSize.getHeight());
 		GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 		
-		
+		GameObjects.get().setGameCanvas(gameCanvas);
+		GameObjects.get().setSprites(sprites);
 		Image back = new Image(new FileInputStream("./Resources/Images/space.png"));
 
 		// Setting up player 1 
@@ -99,12 +100,13 @@ public class Game{
 
 		EventManager.get();
 		
+
 		//animation timemr is used to animate things and run the game loop
 		AnimationTimer frame = new AnimationTimer() { //frame is the current game frame
 			@Override
 			public void handle(long timeStamp) { //this gets called often, timeStamp is how long since last frame
-				
-			
+				double timeSince = (int) (timeStamp - lastTimeStamp) * 0.000001;
+				lastTimeStamp = timeStamp;
 				
 				gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
 				gc.drawImage(back, -300 - ScreenFocus.getScreenFocus().getX(), -300 - ScreenFocus.getScreenFocus().getY());
@@ -121,7 +123,7 @@ public class Game{
 				
 				Inventory.handleAndDraw(gc);
 				InventoryAdv.handleAndDraw(gc);
-				EventManager.get().update();
+				EventManager.get().update(timeSince);
 				GUI.getInstance().draw(gc);
 
 			}

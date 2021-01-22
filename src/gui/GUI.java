@@ -17,7 +17,7 @@ public class GUI {
 
 	private static GUI instanceGUI = null;
 	
-	private Alert alert = new Alert("Warning! Astroids Incoming!", 300);
+	private Alert alert;
 	private LinkedList<Player> players = new LinkedList<Player>();
 	
 	private GUI() {
@@ -51,7 +51,8 @@ public class GUI {
 	public void draw(GraphicsContext gc) {
 		gc.save(); // Save the graphics brush
 		
-		alert.draw(gc);
+		if (alert != null)
+			alert.draw(gc);
 		
 		players.forEach(player -> drawPlayerGUI(player, gc));
 		
