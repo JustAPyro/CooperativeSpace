@@ -38,6 +38,17 @@ public class Offer {
 		return outputQuantity;
 	}
 	
+	private int lcm(int n1, int n2) {
+		return (n1 / gcd(n1, n2)) * n2;
+	}
+	
+	private int gcd(int n1, int n2) {
+		if (n2 == 0) {
+			return n1;
+		}
+		return  gcd(n2, n1 % n2);
+	}
+	
 	// Execute the offer based on current input and output quantity
 	public void execute() {
 
@@ -47,7 +58,17 @@ public class Offer {
 			InventoryAdv.addItem(output, outputQuantity); // and add the output
 		}
 		else {
-			return; // Do nothing!
+			int have = InventoryAdv.getQuantity(input); // Get the quantity we DO have
+			int gcd = gcd(inputQuantity, outputQuantity); // Get the GCD to calculate conversion rate
+			
+			// Conversion rate is a fraction, dividing both by gcd allows us to simplify and get min in/out
+			int minIn = inputQuantity/gcd; 
+			int minOut = outputQuantity/gcd;
+			
+			int actualTransaction = have/minIn; // Calculate how many transactions we can make based on how much the player actually has and minIn
+			
+			InventoryAdv.removeItem(input, actualTransaction * minIn); // Subtract the max amount we can
+			InventoryAdv.addItem(output, actualTransaction * minOut); // Add the max amount we can
 		}
 		
 	}

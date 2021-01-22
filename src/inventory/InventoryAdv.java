@@ -127,6 +127,16 @@ public class InventoryAdv {
 		
 	}
 	
+	// Returns the amount of a given item
+	public static int getQuantity(Itemizable item) {
+		for (int i = 0; i < items.size(); i++) { // for each item
+			if (items.get(i).stacksWith(item)) { // If this item stacks with the item we're looking for
+				return quantity.get(i); // Return t he quantity of that item
+			}
+		}
+		return 0;
+	}
+	
 	// Method to collect resources from a planet
 	public static void collectPlanetaryResources(Planet planet) {
 		// TODO: We need to make sure this doesn't add to players past the stack size
