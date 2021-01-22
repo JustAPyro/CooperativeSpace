@@ -63,7 +63,6 @@ public abstract class Ship implements Itemizable{
 	
 	// Used to change health to avoid setHealth(getHealth() - 10)
 	public void changeHealth(double healthChange) {
-		System.out.println("Changing health from " + health + " to " + health + healthChange);
 		health = health + healthChange;
 	}
 	
