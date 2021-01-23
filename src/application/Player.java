@@ -1,12 +1,21 @@
 package application; // Package with Applications
 
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.LinkedList; 				// Linked List for interaction objects
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext; // Graphics Context for extra drawing
 import javafx.scene.input.KeyCode;			// KeyCode for key binding values
 import javafx.scene.input.KeyEvent;			// KeyEvent to handle inputs
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import menu.MainMenu;
@@ -50,6 +59,8 @@ public class Player extends Sprite implements TakesDamage{
 	private int drawGUIy = 30;
 	
 	private Ship ship;
+	
+	private Media shotSoundMedia;
 	
 	// Standard No-Argument Constructor
 	public Player() {
@@ -97,6 +108,8 @@ public class Player extends Sprite implements TakesDamage{
 		rightPressed = false;
 		forwardPressed = false;
 		backwardPressed = false;
+		
+		shotSoundMedia = new Media(new File(ResourceLocations.fireSound).toURI().toString());
 	}
 	
 	// Returns player progress landing at any given planet
@@ -180,6 +193,12 @@ public class Player extends Sprite implements TakesDamage{
 	
 	// Fires the main weapon
 	private void mainWeapon(LinkedList<Sprite> allSprites) {
+		
+		// TODO: Load this sound beforehand to play faster
+		MediaPlayer shotSound = new MediaPlayer(shotSoundMedia);
+		shotSound.setRate(2);
+		shotSound.play();
+
 		
 		allSprites.add(new Shot(this, shotSpeed)); // Create the new shot based on this player and using shot speed, and add it to sprite list
 		mainPressed = false; // set pressed equal to false to make them repress for more shots

@@ -12,6 +12,7 @@ import javafx.scene.transform.Rotate;
 
 public abstract class Sprite {
 
+	// ADD COMMENT
 	boolean showBoundingLines = false;
 
 	//Int values for x y position and orientation
