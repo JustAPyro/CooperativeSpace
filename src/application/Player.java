@@ -268,6 +268,7 @@ public class Player extends Sprite implements TakesDamage{
 		this.setImage(ship.getShipImage());
 		
 		if (ship instanceof Protector) {
+			ship.setPlayer(this);
 			ScreenFocus.setScreenFocus((Protector) ship);
 		}
 		

@@ -255,6 +255,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	
 	
 	public Planet(int x, int y, Image img) {
+		System.out.println("Creating planet, ships in inventory: " + InventoryAdv.getShips().size());
 		primaryStorage = 200;
 		secondaryStorage = 100;
 		this.x = x;
@@ -515,6 +516,8 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	
 	private void configureHangerMenu() {
 		
+		System.out.println("Configuring hanger menu, ships in inventory: " + InventoryAdv.getShips().size());
+		
 		// Set the properties we're using for earth menu (Light blue background, rounded corners, and about 8px of vertical spacing)
 		hangerMenu.setFillStrokeColor(Color.rgb(0,  255,  255, .2), Color.BLACK);
 		hangerMenu.setRounding(25, 25);
@@ -527,12 +530,14 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		new MenuHorizontalIndicators(hangerMenu, Align.CENTER, "Ships", false , 25, 10, 40);
 		
 
-		MenuDisplay display = new MenuDisplay(hangerMenu, Align.CENTER, Inventory.getShips(), 200);
+		MenuDisplay display = new MenuDisplay(hangerMenu, Align.CENTER, InventoryAdv.getShips(), 200);
 		
 		MenuLabel sel = new MenuLabel(hangerMenu, Align.LEFT, "Switch", true, 24, 10, 40) {
 			@Override
 			public void select() {
-				landed.forEach(player -> player.switchShip(display.getSelected()));
+				landed.forEach(player -> { 
+					player.switchShip(display.getSelected());
+				});
 			}
 		};
 		new MenuToolTip(hangerMenu, sel, "Selects the ship shown above.");

@@ -22,7 +22,7 @@ public class Protector extends Ship implements Focusable{
 		setForwardPower(0.025);
 		setTurningPower(1);
 	}
-
+	
 	@Override
 	public double getX() {
 		return getPlayer().getX();
