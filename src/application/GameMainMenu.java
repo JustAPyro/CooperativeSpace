@@ -140,7 +140,6 @@ public class GameMainMenu {
 	
 	private void playWorld() {
 		try {
-			System.out.println(window);
 			Game game = new Game(layout);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
