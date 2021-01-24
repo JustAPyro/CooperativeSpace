@@ -15,7 +15,11 @@ public class driver extends Application{ // Driver extends the application
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException // Application / stage start
 	{
-		Game game = new Game(); // Launch new game
+		
+		new GameMainMenu(primaryStage);
+		
+		// Uncomment this to start a new game
+		//Game game = new Game(); // Launch new game
 	}
 	
 }

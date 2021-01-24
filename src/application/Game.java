@@ -56,7 +56,6 @@ public class Game{
 		InventoryAdv.setSize(50, 50, 4);
 		InventoryAdv.addMoney(100);
 		InventoryAdv.addItem(new Fighter(), 1);
-		System.out.println("Added ship to inventory, ships: " + InventoryAdv.getShips().size());
 		/*
 		InventoryAdv.addItem(new Material(MaterialType.ALUMINUM));
 		InventoryAdv.addItem(new Material(MaterialType.OXYGEN));
@@ -78,7 +77,6 @@ public class Game{
 		p2.setCanvas(gameCanvas);
 		*/
 		
-		System.out.println("Calling planet constructor, ships in inventory: " + InventoryAdv.getShips().size());
 		Planet earth = new Planet(0, 0, new Image(new FileInputStream("./Resources/Images/Planets/planet_3.png")));
 		earth.setCanvas(gameCanvas);
 		earth.setName("Earth");
