@@ -27,7 +27,7 @@ import ships.Protector;
 
 public class Game{
 
-	Stage window; //this is the actual window of the game (Kinda like a JFrame)
+	Stage window = null; //this is the actual window of the game (Kinda like a JFrame)
 	Scene scene; //This is the scene that's currently displayed in the window
 	GraphicsContext gc;
 	long lastTimeStamp = 0;
@@ -35,10 +35,10 @@ public class Game{
 	
 	LinkedList<Sprite> sprites = new LinkedList<Sprite>();
 	
-	public Game() throws FileNotFoundException { //when a game is created,
-		window = new Stage(); //initalize a stage
-		window.setTitle("Cooperative Space"); //set the title of the game
-		window.setFullScreen(true); //set game to fullscreen 
+	public Game(StackPane layout) throws FileNotFoundException { //when a game is created,
+		//window = stage; //initalize a stage
+		//window.setTitle("Cooperative Space"); //set the title of the game
+		//window.setFullScreen(true);
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Canvas gameCanvas = new Canvas(screenSize.getWidth(), screenSize.getHeight());
@@ -129,9 +129,8 @@ public class Game{
 		};
 		frame.start();
 		
-		StackPane layout = new StackPane(); //create a new layout to use for our scene
 		layout.getChildren().add(gameCanvas);// gamecanvas to it
-		Scene scene = new Scene(layout); //creates a new scene using the stack layout
+		Scene scene = layout.getScene();
 		
 		scene.setOnKeyPressed(event -> {
 			if (p1.ownedHotkey(event.getCode())) { p1.inputPressed(event); }
@@ -143,8 +142,7 @@ public class Game{
 			//if (p2.ownedHotkey(event.getCode())) { p2.inputReleased(event); }
 		});
 		
-		window.setScene(scene); //set the scene to the window
-		window.show(); //show the window
+
 	}
 
 	

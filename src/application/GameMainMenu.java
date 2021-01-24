@@ -25,6 +25,7 @@ public class GameMainMenu {
 	private Scene scene; // Variable for scene in the window
 	private GraphicsContext gc; // Variable for the graphics context to draw on this screen
 	private Dimension screenSize;
+	private Canvas canvas;
 	
 	private double menuCenter;
 	
@@ -32,13 +33,14 @@ public class GameMainMenu {
 	private Image titleBackground;
 	
 	private Font spaceFont;
-	
+	StackPane layout;
 	int selection = 0;
 	
-	public GameMainMenu(Stage window) {
+	public GameMainMenu(Stage primaryStage) {
+		window = primaryStage;
 		window.setTitle("Cooperative Space Alpha"); // Set the title of the window
 		window.setFullScreen(true); // Set the game to full-screen by default
-	
+		
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Canvas canvas = new Canvas(screenSize.getWidth(), screenSize.getHeight());
 		gc = canvas.getGraphicsContext2D();
@@ -92,7 +94,7 @@ public class GameMainMenu {
 	};
 	frame.start();
 	
-	StackPane layout = new StackPane(); // Creating a new layout
+	layout = new StackPane(); // Creating a new layout
 	layout.getChildren().add(canvas); // Get children
 	Scene scene = new Scene(layout); // Add the layout
 	
@@ -137,7 +139,13 @@ public class GameMainMenu {
 	}
 	
 	private void playWorld() {
-		
+		try {
+			System.out.println(window);
+			Game game = new Game(layout);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void loadWorld() {
