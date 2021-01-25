@@ -53,7 +53,7 @@ public class Game{
 		p1.setHotkeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.SPACE, KeyCode.E, KeyCode.Q); //set the players hotkeys (Might do this from savefile later)
 		GUI.getInstance().addPlayers(p1);
 		
-		InventoryAdv.setSize(50, 50, 4);
+		InventoryAdv.setSize(50, 200, 4);
 		InventoryAdv.addMoney(100);
 		InventoryAdv.addItem(new Fighter(), 1);
 		/*

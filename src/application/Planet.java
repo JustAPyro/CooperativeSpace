@@ -26,6 +26,7 @@ import items.Money;
 
 import java.util.Random;
 
+import ability.TriShot;
 import events.EventManager;
 import inventory.InventoryAdv;
 import inventory.Offer;
@@ -62,11 +63,12 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	private long expiredTimeStamp = 0;
 	private MainMenu activeMenu;
 	
-	private MainMenu shopMenu = new MainMenu("Shop", 300, 500, 200, 400);
-	private MainMenu mainMenu = new MainMenu(name, 300, 500, 200, 400);
-	private MainMenu repairMenu  = new MainMenu("Repair", 300, 500, 200, 400);
-	private MainMenu sellMenu = new MainMenu("Sell", 300, 500, 200, 400);
-	private MainMenu hangerMenu = new MainMenu("Hanger", 300, 500, 200, 400);
+	private int xMenu = 650; private int yMenu = 350;
+	private MainMenu shopMenu = new MainMenu("Shop", xMenu, yMenu, 200, 400);
+	private MainMenu mainMenu = new MainMenu(name, xMenu, yMenu, 200, 400);
+	private MainMenu repairMenu  = new MainMenu("Repair", xMenu, yMenu, 200, 400);
+	private MainMenu sellMenu = new MainMenu("Sell", xMenu, yMenu, 200, 400);
+	private MainMenu hangerMenu = new MainMenu("Hanger", xMenu, yMenu, 200, 400);
 
 	private LinkedList<Offer> allOffers = new LinkedList<Offer>();
 	
@@ -406,7 +408,14 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		};
 		new MenuToolTip(shopMenu, menuShipItem, "A protector ship: Capable of claiming screen focus for long distance travel and armed with support weaponry this is a great addition to any fleet despite it's lower speed and manueverability.");
 		
-		MenuLabel ml2 = new MenuLabel(shopMenu, Align.LEFT, "Storage Buff", true, 24, 10, 40);
+		MenuLabel ml2 = new MenuLabel(shopMenu, Align.LEFT, "Tri-Shot", true, 24, 10, 40) {
+			Offer offer = new Offer(100, new Money(), 1, new TriShot());
+			@Override //override the select menu
+			public void select() {
+				offer.execute();
+				
+			}
+		};
 		new MenuToolTip(shopMenu, ml2, "Increase planetary resource storage, allowing the planet to collect more resources while you're away.");
 		
 		MenuLabel ml3 = new MenuLabel(shopMenu, Align.LEFT, "Production Buff", true, 24, 10, 40);

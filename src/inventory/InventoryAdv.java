@@ -31,7 +31,7 @@ public class InventoryAdv {
 	
 	private static int matLevel = 70;		// Level to start drawing material menu (Will be adjusted based on items above it)
 	private static int shipLevel = 100;		// Level to start drawing ship menu (Adjusted based on materials above it)
-	private static int powerLevel = 130;	// Level to start drawing power up / weapons menu (To be added)
+	private static int abilityLevel = 130;	// Level to start drawing power up / weapons menu (To be added)
 
 	//private static Money moneyItem = new Money();
 	private static Money moneyItem = new Money();
@@ -190,6 +190,7 @@ public class InventoryAdv {
 		
 		int shipNum = 0;
 		int itemNum = 0;
+		int abilityNum = 0;
 		int i = 0;
 		// TODO: This needs to be changed to a better data structure (Use hash map and object wrapper to keep values with them)
 		for (Itemizable item : items) {
@@ -218,6 +219,18 @@ public class InventoryAdv {
 			
 		}
 		
+		abilityLevel = 130 + ((itemNum+3)/itemAccross)*(itemSize+itemSpacing) + itemSpacing + ((shipNum+3)/itemAccross)*(itemSize+itemSpacing) + itemSpacing;
+		
+		for (Itemizable item : items) {
+			if (item.getCategory() == ItemCategory.ABILITY) { 
+				int ix = x + border + itemSize/2 + (((abilityNum%itemAccross))*(itemSize+itemSpacing));
+				int iy = y + abilityLevel + border*2 + itemSize/2 + (abilityNum/itemAccross)*(itemSize+itemSpacing);
+				item.drawItemIcon(gc, ix, iy, itemSize, itemSize);
+				shipNum++;
+				
+			}
+		}
+		
 		//Set text alignment left again to draw sub-menu title text
 		gc.setTextAlign(TextAlignment.LEFT);
 		
@@ -230,8 +243,8 @@ public class InventoryAdv {
 		gc.strokeLine(x + border, y + border + shipLevel, x + width - border, y + border + shipLevel);
 		
 		// Fill and stroke the power ups header (Disabled until power ups/weapons are added)
-		//gc.fillText("Power-ups", x + border, y + border + powerLevel - 2);
-		//gc.strokeLine(x + border, y + border + powerLevel, x + width - border, y + border + powerLevel);
+		gc.fillText("Power-ups", x + border, y + border + abilityLevel - 2);
+		gc.strokeLine(x + border, y + border + abilityLevel, x + width - border, y + border + abilityLevel);
 	}
 	
 	
