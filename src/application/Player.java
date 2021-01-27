@@ -58,6 +58,8 @@ public class Player extends Sprite implements TakesDamage{
 	private int drawGUIx = 30;
 	private int drawGUIy = 30;
 	
+	private Boolean equipOpen = false;
+	
 	private Ship ship;
 	
 	private Media shotSoundMedia;
@@ -318,5 +320,9 @@ public class Player extends Sprite implements TakesDamage{
 	@Override
 	public void Damage(double dmg) {
 		ship.changeHealth(dmg * -1);
+	}
+
+	public boolean isEquipOpen() {
+		return equipOpen;
 	}
 }
