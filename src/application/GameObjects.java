@@ -10,6 +10,7 @@ public class GameObjects {
 	
 	private Canvas gameCanvas = null; // Canvas the game is being played on
 	private LinkedList<Sprite> sprites = null;
+	private LinkedList<Player> players = new LinkedList<Player>();
 	
 	private GameObjects() {
 		
@@ -31,6 +32,14 @@ public class GameObjects {
 	
 	public void setGameCanvas(Canvas gameCanvas) {
 		this.gameCanvas = gameCanvas;
+	}
+	
+	public void addPlayer(Player p) {
+		players.add(p);
+	}
+	
+	public LinkedList<Player> players() {
+		return players;
 	}
 	
 	public LinkedList<Sprite> sprites() {

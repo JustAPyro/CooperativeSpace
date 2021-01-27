@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
 import events.EventManager;
+import gui.EquippedGUI;
 import gui.GUI;
 import inventory.InventoryAdv;
 import inventory.Offer;
@@ -34,6 +35,7 @@ public class Game{
 	
 	
 	LinkedList<Sprite> sprites = new LinkedList<Sprite>();
+	LinkedList<Player> players = new LinkedList<Player>();
 	
 	public Game(StackPane layout) throws FileNotFoundException { //when a game is created,
 		//window = stage; //initalize a stage
@@ -52,6 +54,7 @@ public class Game{
 		Player p1 = new Player(gameCanvas, new Fighter()); //create p1 object
 		p1.setHotkeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.SPACE, KeyCode.E, KeyCode.Q); //set the players hotkeys (Might do this from savefile later)
 		GUI.getInstance().addPlayers(p1);
+		GameObjects.get().addPlayer(p1);
 		
 		InventoryAdv.setSize(50, 200, 4);
 		InventoryAdv.addMoney(100);
@@ -123,7 +126,9 @@ public class Game{
 				Inventory.handleAndDraw(gc);
 				InventoryAdv.handleAndDraw(gc);
 				EventManager.get().update(timeSince);
+
 				GUI.getInstance().draw(gc);
+				EquippedGUI.get().draw();
 
 			}
 		};

@@ -81,6 +81,7 @@ public class GUI {
 		gc.setFont(Font.font("veranda", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		gc.fillText("Health: " + player.getShip().getHealth() + " / " + player.getShip().getMaxHealth(), x + healthWidth/2, y + healthHeight/2);
 		
+		
 		gc.restore();
 	}
 	
