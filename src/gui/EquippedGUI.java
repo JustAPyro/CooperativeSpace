@@ -7,6 +7,7 @@ import application.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 public class EquippedGUI {
 
@@ -41,8 +42,14 @@ public class EquippedGUI {
 		gc.fillRect(canvas.getWidth()/2-width/2, canvas.getHeight()/2-height/2, width, height);
 		gc.strokeRect(canvas.getWidth()/2-width/2, canvas.getHeight()/2-height/2, width, height);
 		
+		gc.setTextAlign(TextAlignment.CENTER);
+		gc.setFont(GameObjects.get().menuTitleFont(36));
 		gc.setFill(Color.BLACK);
-		gc.strokeText("Equipped", canvas.getWidth()/2,  canvas.getHeight()/4);
+		gc.fillText("Equipped", canvas.getWidth()/2,  canvas.getHeight()/3+100);
+	}
+	
+	private void drawPlayerEquip(Player player, int x, int y) {
+		
 	}
 	
 	
