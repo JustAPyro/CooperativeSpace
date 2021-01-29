@@ -3,6 +3,10 @@ package application;
 import java.util.LinkedList;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import menu.Align;
 
 public class GameObjects {
 	
@@ -50,6 +54,12 @@ public class GameObjects {
 	
 	public void setSprites(LinkedList<Sprite> sprites) {
 		this.sprites = sprites;
+	}
+	
+
+	// FONT GETTERS
+	public Font menuTitleFont(int size) {
+		return Font.font("veranda", FontWeight.BOLD, FontPosture.REGULAR, size);
 	}
 	
 

@@ -6,6 +6,7 @@ import application.GameObjects;
 import application.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class EquippedGUI {
 
@@ -36,8 +37,12 @@ public class EquippedGUI {
 		Canvas canvas = GameObjects.get().gameCanvas();
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 	
+		gc.setFill(Color.AZURE);
 		gc.fillRect(canvas.getWidth()/2-width/2, canvas.getHeight()/2-height/2, width, height);
+		gc.strokeRect(canvas.getWidth()/2-width/2, canvas.getHeight()/2-height/2, width, height);
 		
+		gc.setFill(Color.BLACK);
+		gc.strokeText("Equipped", canvas.getWidth()/2,  canvas.getHeight()/4);
 	}
 	
 	
