@@ -6,6 +6,7 @@ import application.GameObjects;
 import application.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -46,9 +47,38 @@ public class EquippedGUI {
 		gc.setFont(GameObjects.get().menuTitleFont(36));
 		gc.setFill(Color.BLACK);
 		gc.fillText("Equipped", canvas.getWidth()/2,  canvas.getHeight()/3+100);
+		
+		drawPlayerEquip(GameObjects.get().players().getFirst(), canvas.getWidth()/2, canvas.getHeight()/3+200);
 	}
 	
-	private void drawPlayerEquip(Player player, int x, int y) {
+	private void drawPlayerEquip(Player player, double x, double y) {
+		Canvas canvas = GameObjects.get().gameCanvas();
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+	
+		gc.save();
+		
+		Image ship = player.getShip().getShipImage();
+		gc.drawImage(ship, x-ship.getWidth()/2, y-ship.getHeight()/2);
+		
+		gc.strokeRect(x+ship.getWidth()/2+10, y+10, 25, 25);
+		gc.strokeRect(x+ship.getWidth()/2+10, y-35, 25, 25);
+		gc.strokeRect(x-ship.getWidth()/2-10-25, y+10, 25, 25);
+		gc.strokeRect(x-ship.getWidth()/2-10-25, y-35, 25, 25);
+		
+		gc.setFill(Color.LIGHTPINK);
+		gc.fillRect(x+ship.getWidth()/2+10, y+10, 25, 25);
+		
+		gc.setFill(Color.LIGHTBLUE);
+		gc.fillRect(x+ship.getWidth()/2+10, y-35, 25, 25);
+		
+		gc.setFill(Color.LIGHTGREEN);
+		gc.fillRect(x-ship.getWidth()/2-10-25, y+10, 25, 25);
+		
+		gc.setFill(Color.LIGHTYELLOW);
+		gc.fillRect(x-ship.getWidth()/2-10-25, y-35, 25, 25);		
+		
+		gc.restore();
+
 		
 	}
 	
