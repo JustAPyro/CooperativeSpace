@@ -52,7 +52,7 @@ public class Game{
 
 		// Setting up player 1 
 		Player p1 = new Player(gameCanvas, new Fighter()); //create p1 object
-		p1.setHotkeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.SPACE, KeyCode.E, KeyCode.Q); //set the players hotkeys (Might do this from savefile later)
+		p1.setHotkeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.SPACE, KeyCode.E, KeyCode.Q, KeyCode.C); //set the players hotkeys (Might do this from savefile later)
 		GUI.getInstance().addPlayers(p1);
 		GameObjects.get().addPlayer(p1);
 		

@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import gui.EquippedGUI;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext; // Graphics Context for extra drawing
 import javafx.scene.input.KeyCode;			// KeyCode for key binding values
@@ -37,6 +38,7 @@ public class Player extends Sprite implements TakesDamage{
 	private boolean planetBound = false;// Landed (True/False)
 	private Planet planet;
 	
+	
 	//player related hot keys (Can be changed per player)
 	private KeyCode left; 		// hot key for rotate left
 	private KeyCode right; 		// hot key for rotate right
@@ -45,6 +47,7 @@ public class Player extends Sprite implements TakesDamage{
 	private KeyCode main;		// hot key for main weapon
 	private KeyCode secondary;  // hot key for secondary weapon
 	private KeyCode inventory;  // Hot key for opening the inventory
+	private KeyCode character; 	// Hot key for opening character panel
 	
 	//Boolean values for when each key is pressed
 	private Boolean mainPressed;
@@ -54,6 +57,7 @@ public class Player extends Sprite implements TakesDamage{
 	private Boolean backwardPressed;
 	private Boolean secondaryPressed;
 	private Boolean inventoryPressed;
+	private Boolean characterPressed;
 	
 	private int drawGUIx = 30;
 	private int drawGUIy = 30;
@@ -73,6 +77,7 @@ public class Player extends Sprite implements TakesDamage{
 		orientation = 0;// Start orientation at 0 (Facing directly up)
 		
 		// Set all key presses to false on creation
+		characterPressed = false;
 		inventoryPressed = false;
 		secondaryPressed = false;
 		mainPressed = false;
@@ -103,6 +108,7 @@ public class Player extends Sprite implements TakesDamage{
 		isFriendly = true; // Set to friendly so people can't shoot themselves
 		
 		// Set all key presses to false on creation
+		characterPressed = false;
 		inventoryPressed = false;
 		secondaryPressed = false;
 		mainPressed = false;
@@ -120,7 +126,8 @@ public class Player extends Sprite implements TakesDamage{
 	}
 	
 	// Set hot keys (left, right forward, backward, main weapon)
-	public void setHotkeys(KeyCode left, KeyCode right, KeyCode forward, KeyCode backward, KeyCode main, KeyCode secondary, KeyCode inventory) {
+	public void setHotkeys(KeyCode left, KeyCode right, KeyCode forward, KeyCode backward, KeyCode main, KeyCode secondary, KeyCode inventory, KeyCode character) {
+		this.character = character;
 		this.left = left;
 		this.right = right;
 		this.forward = forward;
@@ -133,7 +140,7 @@ public class Player extends Sprite implements TakesDamage{
 	// Returns true if the key code is owned by this player
 	public boolean ownedHotkey(KeyCode input) {
 		// If input is ANY of this players keybinds
-		if (input == left || input == right || input == forward || input == backward || input == main || input == secondary || input == inventory) { 
+		if (input == left || input == right || input == forward || input == backward || input == main || input == secondary || input == inventory || input == character) { 
 			return true; // Return true
 		}
 		else { 				// Otherwise, 
@@ -163,6 +170,8 @@ public class Player extends Sprite implements TakesDamage{
 		if (event.getCode() == main) { mainPressed = true; }
 		if (event.getCode() == secondary) { secondaryPressed = true; }
 		if (event.getCode() == inventory) { inventoryPressed = true; }
+		if (event.getCode() == character) { characterPressed = true; }
+		
 	}
 	
 	// Adjusts the booleans on key release
@@ -177,6 +186,8 @@ public class Player extends Sprite implements TakesDamage{
 		if (event.getCode() == main) { mainPressed = false; }
 		if (event.getCode() == secondary) { secondaryPressed = false; }
 		if (event.getCode() == inventory) { inventoryPressed = false; }
+		if (event.getCode() == character) { characterPressed = false; }
+		
 	}
 
 	// Returns the type of sprite
@@ -246,6 +257,7 @@ public class Player extends Sprite implements TakesDamage{
 			if (backwardPressed) { }
 			if (mainPressed) { mainWeapon(allSprites); }
 			if (inventoryPressed) { Inventory.toggle(); InventoryAdv.toggle(); inventoryPressed = false; }
+			if (characterPressed) { EquippedGUI.get().toggle(); characterPressed = false; }
 			
 			// As well as drawing the player HUD
 			//drawHUD(gameCanvas.getGraphicsContext2D());
@@ -260,6 +272,7 @@ public class Player extends Sprite implements TakesDamage{
 			if (leftPressed) { activeMenu.playerLeft(); leftPressed = false; }
 			if (mainPressed) { activeMenu.playerMainButton(); mainPressed = false; }
 			if (inventoryPressed) { Inventory.toggle(); InventoryAdv.toggle(); inventoryPressed = false; }
+			if (characterPressed) { EquippedGUI.get().toggle(); characterPressed = false; }
 		}
 			
 		super.update(timeStamp, allSprites); // Call the super function

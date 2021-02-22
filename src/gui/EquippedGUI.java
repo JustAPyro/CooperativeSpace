@@ -16,6 +16,7 @@ public class EquippedGUI {
 	
 	private int width = 600;
 	private int height = 300;
+	private boolean open = false;
 	
 	private  EquippedGUI() {
 		
@@ -28,7 +29,17 @@ public class EquippedGUI {
 		return eqgui;
 	}
 	
+	public void toggle()
+	{
+		// Toggles if the character pane is open or not
+		open = !open; 
+	}
+	
 	public void draw() {
+		
+		if (open == false)	// If the character pane isn't open
+			return;			// Just skip drawing everything
+		
 		LinkedList<Player> players = GameObjects.get().players();
 		boolean active = false;
 		for (Player p : players) {
@@ -52,6 +63,7 @@ public class EquippedGUI {
 	}
 	
 	private void drawPlayerEquip(Player player, double x, double y) {
+		
 		Canvas canvas = GameObjects.get().gameCanvas();
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 	
