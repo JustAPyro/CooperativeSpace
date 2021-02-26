@@ -15,6 +15,8 @@ public class Tanker extends Ship {
 	 * This returns True if the passed item is compatible to stack with this class object in shop menus and inventory.
 	 * 
 	 * @param item The item you want to know if this ship will stack with in shop & Inventory.
+	 * 
+	 * @return True if the items should stack, false otherwise.
 	 */
 	@Override
 	public boolean stacksWith(Itemizable item) {
