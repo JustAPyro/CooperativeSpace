@@ -20,6 +20,7 @@ public abstract class Ship implements Itemizable{
 	private double forwardPower;
 	private double turningPower;
 	
+	// Default health and max health
 	private double health = 100;
 	private double maxHealth = 100;
 	
@@ -31,74 +32,140 @@ public abstract class Ship implements Itemizable{
 	
 	// Getters & Setters :
 	
-	// set name of ship class
+	// ========== Ship Name ==========
+	
+	/**
+	 * Sets the name of the ship type.
+	 * 
+	 * @param shipName Name of the ship type.
+	 */
 	public void setShipName(String shipName) {
 		this.shipName = shipName;
 	}
 	
-	// Get name of ship class
+	/**
+	 * Get the name of the ship type
+	 * 
+	 * @return The name of the ship type.
+	 */
 	public String getShipName() {
 		return shipName;
 	}
 	
-	// Set ship forward power (acceleration)
+	// ========== Forward Power ==========
+
+	/**
+	 * Sets the forward power of the ship. This determines the accelerating power.
+	 * 
+	 * @param forwardPower Forward power of the ship
+	 */
 	public void setForwardPower(double forwardPower) {
 		this.forwardPower = forwardPower;
 	}
 	
-	// Get ship forward power (acceleration)
+	/**
+	 * Returns the forward power of the ship. This is used to determine accelerating power.
+	 * 
+	 * @return The forward power of the ship.
+	 */
 	public double getForwardPower() {
 		return forwardPower;
 	}
 	
-	// Set turning power
+	// ========== Turning Power ==========
+	
+	/**
+	 * Sets the turning power of the ship, which determines how quickly the ship can turn and navigate.
+	 * 
+	 * @param turningPower The amount of turning power
+	 */
 	public void setTurningPower(double turningPower) {
 		this.turningPower = turningPower;
 	}
 	
-	// Get turning power
+	/**
+	 * Returns the turning power of the ship - This is used to calculate how quickily the ship turns and adjusts course.
+	 * 
+	 * @return The turning power of the ship.
+	 */
 	public double getTurningPower() {
 		return turningPower;
 	}
 	
-	// Used to change health to avoid setHealth(getHealth() - 10)
+	// ========== Health ==========
+	
+	/**
+	 * Utility function to change the health of the ship without requiring a call to getHealth(). Can be used to heal or damage this ship (Using a negative value)
+	 * 
+	 * @param healthChange The amount of health to either restore (Or if negative, remove)
+	 */
 	public void changeHealth(double healthChange) {
 		health = health + healthChange;
 	}
 	
-	// Set health
+	/**
+	 * This sets the health of the ship to a specific value.
+	 * 
+	 * @param health The desired health of the ship.
+	 */
 	public void setHealth(double health) {
 		this.health = health;
 	}
 	
-	// Gets health
+	/**
+	 * Returns the current health of the ship.
+	 * 
+	 * @return Health of the ship
+	 */
 	public double getHealth() {
 		return health;
 	}
 	
-	// Sets max health
-	public void setMaxHealth(double maxHealth) {
-		this.maxHealth = maxHealth;
-	}
-	
-	// Gets max health
-	public double getMaxHealth() {
-		return maxHealth;
-	}
-	
-	// Sets the health to a percent based on current maxHealth
+	/**
+	 * Sets the health based on a percentage of the ships max health.
+	 * 
+	 * @param percent The percent of max health you would like current health set to.
+	 */
 	public void setHealthPercent(double percent) {
 		health = (percent/100)*maxHealth;
 	}
 	
-	// Gets health as a percent based on current maxHealth
+	/**
+	 * Gets the health, returned as a percentage of the ships max health.
+	 * 
+	 * @return The health of the ship represented as a percent of max health.
+	 */
 	public double getHealthPercent() {
 		return (health/maxHealth)*100;
 	}
 	
-	// OVERLOAD: SetShipImage: String, FileInputStream, Image
+	// ========== Max Health ==========
 	
-	// (Overloaded) Set Ship image using a file location string
+	/**
+	 * Sets the max health of a ship.
+	 * 
+	 * @param maxHealth Desired max health.
+	 */
+	public void setMaxHealth(double maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+	
+	/**
+	 * Returns the maximum health of the ship.
+	 * 
+	 * @return The maximum health of the ship as a double.
+	 */
+	public double getMaxHealth() {
+		return maxHealth;
+	}
+	
+	// ========== Ship Image ==========
+	
+	/**
+	 * Sets the ships image based on a file location represented as a String.
+	 * 
+	 * @param fileLocation The file location as a String
+	 */
 	public void setShipImage(String fileLocation) {
 		try {
 			setShipImage(new FileInputStream(fileLocation));
@@ -108,20 +175,35 @@ public abstract class Ship implements Itemizable{
 		}
 	}
 	
-	// (Overloaded) Set ship image using input stream
+	
+	/**
+	 * Sets the ships image based on a file input stream.
+	 * 
+	 * @param inputStream The input string containing desired ship image.
+	 */
 	public void setShipImage(FileInputStream inputStream) {
 		setShipImage(new Image(inputStream));
 	}
 	
-	// (Overloaded) set ship image using image
+	/**
+	 * Sets the ships image using an Image object.
+	 * 
+	 * @param shipImage Image object to be set to ship.
+	 */
 	public void setShipImage(Image shipImage) {
 		this.shipImage = shipImage;
 	}
 	
-	// Returns the shipImage
+	/**
+	 * Returns the ships image.
+	 * 
+	 * @return The ship image as an Image object./
+	 */
 	public Image getShipImage() {
 		return shipImage;
 	}
+	
+	// ========== Player ==========
 	
 	// Gets the parent object
 	public Player getPlayer() {
