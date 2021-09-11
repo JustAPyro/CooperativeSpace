@@ -205,19 +205,35 @@ public abstract class Ship implements Itemizable{
 	
 	// ========== Player ==========
 	
-	// Gets the parent object
+	/**
+	 * Returns the player controlling this ship object.
+	 * 
+	 * @return Player controller object.
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 	
-	// Sets the parent player object
+	/**
+	 * Sets the player controlling this ship object
+	 * 
+	 * @param player The player controller you want to give control of this ship to.
+	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+		
+	// ========== MISC functions ==========
 	
-	// All itemizable items must implement these two methods
-	
-	// Draws the icon for this as an item on menu and inventory
+	/**
+	 * Draws the ship as an item on menus, inventories, or shop menus.
+	 * 
+	 * @param gc The Graphics Context object that the icon will be drawn with.
+	 * @param x The X coordinate for the icon
+	 * @param y the Y coordinate for the icon
+	 * @param width The width of the icon
+	 * @param height The height of the icon
+	 */
 	public void drawItemIcon(GraphicsContext gc, int x, int y, int width, int height) {
 		gc.save();
 		gc.setFill(Color.LIGHTYELLOW);
@@ -229,10 +245,18 @@ public abstract class Ship implements Itemizable{
 		gc.restore();
 	}
 	
-	// Returns a string that's a description of the ship!
+	/**
+	 * Returns a description of the ship. Each style of ship must implement it's own version of this string.
+	 * 
+	 * @return The description of the ship.
+	 */
 	public abstract String getDescription();
 	
-	// Returns the type of item this is
+	/**
+	 * Returns the category of item the ship is in inventory (Always returns a ItemCategory.SHIP)
+	 * 
+	 * @return the item category (Will always be SHIP)
+	 */
 	public ItemCategory getCategory() {
 		return ItemCategory.SHIP; // Return that this is a ship item
 	}
