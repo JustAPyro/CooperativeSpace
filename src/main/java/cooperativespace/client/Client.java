@@ -1,6 +1,7 @@
 package cooperativespace.client;
 
 import cooperativespace.network.NetworkClient;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,18 +10,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.util.HashSet;
 
 public class Client extends Application {
 
     // Create a logger to manage the class
-    private static final Logger logger = LogManager.getLogger();
+    private final static Logger logger = LogManager.getLogger(Client.class);
 
     // Used to track which keys are being pressed
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
@@ -96,6 +95,9 @@ public class Client extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        // log that the Client was set up
+        logger.info("Client completed set-up");
     }
 
 }
