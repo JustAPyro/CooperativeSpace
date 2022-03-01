@@ -1,8 +1,6 @@
-package game.core;
+package cooperativespace.core;
 
-import game.network.NetworkServer;
-
-import java.util.concurrent.ConcurrentHashMap;
+import cooperativespace.network.NetworkServer;
 
 public class CoreGame implements Runnable {
 
@@ -25,6 +23,10 @@ public class CoreGame implements Runnable {
     // Initialize at the start of the game
     public void onStart() {
 
+        // Create a new server
+        NetworkServer server = new NetworkServer(portNumber);
+        server.start();
+
     }
 
     // Update positions
@@ -40,11 +42,8 @@ public class CoreGame implements Runnable {
     @Override
     public void run() {
 
+        // Run the on-start method
         onStart();
-
-        // Create a new server
-        NetworkServer server = new NetworkServer(portNumber);
-        server.start();
 
         // Log the initial time the loop started
         long initialTime = System.nanoTime();

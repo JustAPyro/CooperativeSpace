@@ -1,4 +1,4 @@
-package game.network;
+package cooperativespace.network;
 
 public class NetworkServer extends Thread {
 
