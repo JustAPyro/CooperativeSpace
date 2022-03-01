@@ -24,6 +24,10 @@ public class Client extends Application {
     // Used to track which keys are being pressed
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
 
+    // Theis is the list of keys that will actually be sent to server
+    private final KeyCode[] keysToPush =
+            {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
+
     // Variables for networking
     private NetworkClient networkClient;
     private String ipAddress;
@@ -57,29 +61,9 @@ public class Client extends Application {
             @Override
             public void handle(long l) {
 
-                binaryByte.setLength(0);
-                binaryByte.append("+");
-                //binaryByte.append(PLAYER);
-                if (keysPressed.contains(KeyCode.W)) binaryByte.append("1"); else binaryByte.append("0");
-                if (keysPressed.contains(KeyCode.S)) binaryByte.append("1"); else binaryByte.append("0");
-                binaryByte.append("0000");
 
-                byte[] buffer = {Byte.parseByte(binaryByte.toString(), 2)};
+                networkClient.push(keysPressed);
 
-
-
-                //networkClient.push(buffer);
-                    /*
-                    DatagramPacket packet
-                            = new DatagramPacket(buffer, 1, InetAddress.getLocalHost(), PORT_NUMBER);
-                    socket.send(packet);
-
-
-
-                    byte[] incomingBuffer = new byte[8];
-                    incomingPacket = new DatagramPacket(incomingBuffer, 8);
-                    socket.receive(incomingPacket);
-*/
                 short[] positions = new short[4];
                 //if (networkClient.hasData())
                 //    positions = PongGame.decodeState(networkClient.getReceivedData());
