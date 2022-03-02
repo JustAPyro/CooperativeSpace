@@ -14,6 +14,13 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
 
 public class Client extends Application {
@@ -24,9 +31,13 @@ public class Client extends Application {
     // Used to track which keys are being pressed
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
 
-    // Theis is the list of keys that will actually be sent to server
-    private static final KeyCode[] keysToPush =
-            {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
+
+    // This array establishes which bit in the client-sent package is what action
+    private static final String[] order =
+            {"ACCELERATE", "REVERSE", "ROT_RIGHT", "ROT_LEFT"};
+
+    // This is the list of keys that will actually be packed & sent to server
+    private static final KeyCode[] keybindings = new KeyCode[4];
 
     // Variables for networking
     private NetworkClient networkClient;
@@ -48,11 +59,15 @@ public class Client extends Application {
         Canvas canvas = new Canvas(stage.getWidth(), stage.getHeight());
         box.getChildren().add(canvas);
 
+        // Load in the hotkey configuration
+        loadHotkeys();
+
         // Record scene key presses
         Scene scene = new Scene(box);
         scene.setOnKeyPressed(e -> keysPressed.add(e.getCode()));
         scene.setOnKeyReleased(e -> keysPressed.remove(e.getCode()));
 
+        // Create a network
         networkClient = new NetworkClient(ipAddress, portNumber);
 
         StringBuilder binaryByte = new StringBuilder();
@@ -84,6 +99,46 @@ public class Client extends Application {
         logger.info("Client completed set-up");
     }
 
+
+    private void loadHotkeys() {
+
+        // Create a new file parser
+        JSONParser jsonParser = new JSONParser();
+
+        // Try opening a file
+        try (FileReader reader = new FileReader("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\config.json")) {
+
+            // Read JSON file
+            Object obj = jsonParser.parse(reader);
+
+            // Convert to JSON object and fetch the keybindings object
+            JSONObject configsObject = (JSONObject) obj;
+            JSONObject keybindingsObject = (JSONObject) configsObject.get("keybindings");
+
+            // Insert the keybindings into a tracking array
+            for (int i = 0; i < order.length; i++) {
+                keybindings[i] = KeyCode.getKeyCode(keybindingsObject.get(order[i]).toString());
+            }
+
+        }
+        catch (FileNotFoundException e) {
+            // Log that we failed to find the file
+            logger.error("Game config file not found");
+            logger.error(e);
+        }
+        catch (IOException e) {
+            // Log that there was an interruption or exception while reading file
+            logger.error("IO Exception while reading from config file");
+            logger.error(e);
+        }
+        catch (ParseException e) {
+            // Log that there was an error parsing the config file
+            logger.error("Error occurred while parsing game config file");
+            logger.error(e);
+        }
+
+    }
+
     /**
      * This method packages all current inputs into a byte[] structure to send
      *
@@ -91,8 +146,8 @@ public class Client extends Application {
      */
     private static byte[] packageInputs(HashSet<KeyCode> inputs) {
         byte b = 0;
-        for (int i = 0; i < keysToPush.length; i++) {
-            if (inputs.contains(keysToPush[i]))
+        for (int i = 0; i < keybindings.length; i++) {
+            if (inputs.contains(keybindings[i]))
                 b = setBit(b, i);
         }
 
