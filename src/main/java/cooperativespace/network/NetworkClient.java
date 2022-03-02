@@ -1,30 +1,40 @@
 package cooperativespace.network;
 
 import javafx.scene.input.KeyCode;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.HashSet;
 
 public class NetworkClient extends Thread {
 
+    private static final Logger logger = LogManager.getLogger(NetworkClient.class);
+
+    private DatagramSocket socket;
+    private DatagramPacket packet;
+
     private InetAddress ipAddress;
-    int portNumber;
+    private int portNumber;
 
     private byte byteOut;
 
     public NetworkClient(String ipAddress, int portNumber) {
         try {
 
+            // Parse and assign the IP and port number
             this.ipAddress = parseAddress(ipAddress);
             this.portNumber = portNumber;
-            DatagramSocket socket = new DatagramSocket();
+
+            // Initialize a datagram socket
+            socket = new DatagramSocket();
 
         }
-        catch (SocketException | UnknownHostException e) {
-            e.printStackTrace();
+        catch (SocketException | UnknownHostException e)  {
+
+            // If an error is thrown log it
+            logger.error(e.toString());
+
         }
     }
 
