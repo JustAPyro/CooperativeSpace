@@ -1,0 +1,8 @@
+{
+  "keybindings": {
+    "ACCELERATE": "W",
+    "REVERSE": "S",
+    "ROT_LEFT": "A",
+    "ROT_RIGHT": "D"
+  }
+}

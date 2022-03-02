@@ -14,6 +14,8 @@
     </properties>
 
     <dependencies>
+
+        <!-- JavaFX / Graphics / Drawing Dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
@@ -24,6 +26,8 @@
             <artifactId>javafx-controls</artifactId>
             <version>17.0.2</version>
         </dependency>
+
+        <!-- Logging Dependencies -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -34,6 +38,14 @@
             <artifactId>log4j-core</artifactId>
             <version>2.17.0</version>
         </dependency>
+
+        <!-- JSON handling dependencies -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

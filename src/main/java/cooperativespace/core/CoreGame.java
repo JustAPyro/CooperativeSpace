@@ -25,7 +25,6 @@ public class CoreGame implements Runnable {
 
         // Create a new server
         NetworkServer server = new NetworkServer(portNumber);
-        server.start();
 
     }
 
