@@ -30,8 +30,8 @@ public class Client extends Application {
 
     // Variables for networking
     private NetworkClient networkClient;
-    private String ipAddress;
-    private int portNumber;
+    private String ipAddress = "localhost";
+    private int portNumber = 9875;
 
     public static void main(String[] args) {
         launch(args);
@@ -54,7 +54,6 @@ public class Client extends Application {
         scene.setOnKeyReleased(e -> keysPressed.remove(e.getCode()));
 
         networkClient = new NetworkClient(ipAddress, portNumber);
-        networkClient.start();
 
         StringBuilder binaryByte = new StringBuilder();
         AnimationTimer clock = new AnimationTimer() {
@@ -62,7 +61,8 @@ public class Client extends Application {
             public void handle(long l) {
 
 
-                networkClient.push(keysPressed);
+                byte[] keyPackage = packageInputs(keysPressed);
+                networkClient.push(keyPackage);
 
                 short[] positions = new short[4];
                 //if (networkClient.hasData())

@@ -2,6 +2,10 @@ package cooperativespace.network;
 
 public class NetworkServer extends Thread {
 
-    public NetworkServer(int portNumber) {};
+    private int portNumber;
+
+    public NetworkServer(int portNumber) {
+        this.portNumber = portNumber;
+    }
 
 }

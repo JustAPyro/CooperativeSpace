@@ -1,11 +1,10 @@
 package cooperativespace.network;
 
-import javafx.scene.input.KeyCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.net.*;
-import java.util.HashSet;
 
 public class NetworkClient extends Thread {
 
@@ -29,6 +28,9 @@ public class NetworkClient extends Thread {
             // Initialize a datagram socket
             socket = new DatagramSocket();
 
+            // Start the thread
+            this.start();
+
         }
         catch (SocketException | UnknownHostException e)  {
 
@@ -38,8 +40,14 @@ public class NetworkClient extends Thread {
         }
     }
 
-    public void push(HashSet<KeyCode> keysPressed) {
-
+    public void push(byte[] payload) {
+        try {
+            packet = new DatagramPacket(payload, payload.length, ipAddress, portNumber);
+            socket.send(packet);
+        }
+        catch (IOException e) {
+            logger.error(e.toString());
+        }
     }
 
 
