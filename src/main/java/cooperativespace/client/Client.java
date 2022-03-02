@@ -25,7 +25,7 @@ public class Client extends Application {
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
 
     // Theis is the list of keys that will actually be sent to server
-    private final KeyCode[] keysToPush =
+    private static final KeyCode[] keysToPush =
             {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
 
     // Variables for networking
@@ -83,5 +83,29 @@ public class Client extends Application {
         // log that the Client was set up
         logger.info("Client completed set-up");
     }
+
+    /**
+     * This method packages all current inputs into a byte[] structure to send
+     *
+     * @return
+     */
+    private static byte[] packageInputs(HashSet<KeyCode> inputs) {
+        byte b = 0;
+        for (int i = 0; i < keysToPush.length; i++) {
+            if (inputs.contains(keysToPush[i]))
+                b = setBit(b, i);
+        }
+
+        return new byte[]{b};
+    }
+
+    private static byte setBit(byte b, int position) {
+        return b |= 1 << position;
+    }
+
+    private static byte clearBit(byte b, int position) {
+        return b &= ~(1 << position);
+    }
+
 
 }

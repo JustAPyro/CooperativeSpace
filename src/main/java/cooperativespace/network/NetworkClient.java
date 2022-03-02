@@ -44,13 +44,6 @@ public class NetworkClient extends Thread {
 
 
 
-    private static byte setBit(byte b, int position) {
-        return b |= 1 << position;
-    }
-
-    private static byte clearBit(byte b, int position) {
-        return b &= ~(1 << position);
-    }
 
     private InetAddress parseAddress(String ipAddress) throws UnknownHostException {
 
