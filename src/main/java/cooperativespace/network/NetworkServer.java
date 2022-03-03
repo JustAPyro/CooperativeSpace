@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -64,12 +66,14 @@ public class NetworkServer extends Thread {
                 byte inputByte = incomingPacket.getData()[0];
 
                 // For each bit of the input byte, either add or remove actions from the actionset
-                for (int i = 0; i < 8; i++) {
-                    if (((inputByte >>> i) & 1) == 1)
+                for (int i = 0; i < 4; i++) {
+                    if (((inputByte >>> i) & 1) == 1) {
                         actions.add(CoreGame.actionByteEncodingOrder[i]);
+                    }
                     else
                         actions.remove(CoreGame.actionByteEncodingOrder[i]);
                 }
+               // System.out.println(clientPresses.get(clientID).size());
 
             }
 
@@ -78,4 +82,19 @@ public class NetworkServer extends Thread {
             ex.printStackTrace();
         }
     }
+
+    public int getNumberOfConnections() {
+        return clientPresses.size();
+    }
+
+    public ArrayList<String> getAllPlayers() {
+
+        return new ArrayList<>(clientPresses.keySet());
+
+    }
+
+    public ConcurrentHashMap<String, HashSet<Action>> getActionMap() {
+        return clientPresses;
+    }
+
 }

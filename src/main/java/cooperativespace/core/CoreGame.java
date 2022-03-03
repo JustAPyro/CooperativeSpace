@@ -2,6 +2,10 @@ package cooperativespace.core;
 
 import cooperativespace.network.NetworkServer;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class CoreGame implements Runnable {
 
     // This array establishes which bit in the client-sent package is what action
@@ -38,7 +42,10 @@ public class CoreGame implements Runnable {
 
     // Update positions
     public void onUpdate() {
-        server.get
+        ConcurrentHashMap<String, HashSet<Action>> actions = server.getActionMap();
+        for (String player : actions.keySet()) {
+            System.out.println(actions.get(player));
+        }
     }
 
     // Push to clients
