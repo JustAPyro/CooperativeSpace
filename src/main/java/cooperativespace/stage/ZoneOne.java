@@ -1,7 +1,13 @@
 package cooperativespace.stage;
 
+import cooperativespace.sprites.PlayerSprite;
+import cooperativespace.sprites.Sprite;
+
+import java.util.HashSet;
+
 public class ZoneOne implements WorldStage {
 
+    HashSet<Sprite> players = new HashSet<>();
 
     @Override
     public void loadAssets() {
@@ -10,6 +16,10 @@ public class ZoneOne implements WorldStage {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        for (Sprite player : players) {
+            player.update();
+        }
+
     }
 }

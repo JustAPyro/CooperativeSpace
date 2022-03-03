@@ -41,9 +41,6 @@ public class CoreGame implements Runnable {
         // Create a new server
         server = new NetworkServer(portNumber);
 
-        // load assets for this world stage
-        worldStage.loadAssets();
-
     }
 
     // Update positions
