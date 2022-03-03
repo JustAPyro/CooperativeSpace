@@ -1,5 +1,6 @@
 package cooperativespace.network;
 
+import cooperativespace.core.Action;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NetworkServer extends Thread {
@@ -17,7 +19,7 @@ public class NetworkServer extends Thread {
 
     private DatagramSocket socket;
 
-    private ConcurrentHashMap<String, boolean[]> clientPresses;
+    private ConcurrentHashMap<String, HashSet<Action>> clientPresses;
 
     public NetworkServer(int portNumber) {
         this.portNumber = portNumber;
@@ -44,7 +46,6 @@ public class NetworkServer extends Thread {
 
             while (true) {
 
-
                 // Receive incoming data
                 socket.receive(incomingPacket);
 
@@ -57,11 +58,16 @@ public class NetworkServer extends Thread {
 
                 // Format the incoming packet
                 String inputs = String.format("%07d", Integer.parseInt(Integer.toBinaryString(incomingPacket.getData()[0])));
-                System.out.println(inputs);
+                //System.out.println(inputs);
                 char[] chars = inputs.toCharArray();
                 boolean[] keyPress = new boolean[chars.length];
-                for (int i = 0; i < chars.length; i++)
-                    keyPress[i] = chars[i] == '0';
+
+                byte b = incomingPacket.getData()[0];
+                for (int i = 0; i < 8; i++) {
+                        System.out.print(((b >>> i) & 1) );
+
+                }
+                System.out.println();
 
                 clientPresses.put(clientID, keyPress);
 
