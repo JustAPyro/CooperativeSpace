@@ -1,5 +1,7 @@
 package cooperativespace.client;
 
+import cooperativespace.core.Action;
+import cooperativespace.core.CoreGame;
 import cooperativespace.network.NetworkClient;
 
 import javafx.animation.AnimationTimer;
@@ -30,11 +32,6 @@ public class Client extends Application {
 
     // Used to track which keys are being pressed
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
-
-
-    // This array establishes which bit in the client-sent package is what action
-    private static final String[] order =
-            {"ACCELERATE", "REVERSE", "ROT_RIGHT", "ROT_LEFT"};
 
     // This is the list of keys that will actually be packed & sent to server
     private static final KeyCode[] keybindings = new KeyCode[4];
@@ -102,6 +99,8 @@ public class Client extends Application {
 
     private void loadHotkeys() {
 
+        logger.info("Attempting to load hotkeys from config file");
+
         // Create a new file parser
         JSONParser jsonParser = new JSONParser();
 
@@ -115,10 +114,20 @@ public class Client extends Application {
             JSONObject configsObject = (JSONObject) obj;
             JSONObject keybindingsObject = (JSONObject) configsObject.get("keybindings");
 
+            logger.info("Config file read, attempting to load values");
+
             // Insert the keybindings into a tracking array
-            for (int i = 0; i < order.length; i++) {
-                keybindings[i] = KeyCode.getKeyCode(keybindingsObject.get(order[i]).toString());
+            for (int i = 0; i < keybindings.length; i++) {
+
+                // Start by finding which action we are attempting to bind
+                Action actionToBind = CoreGame.actionByteEncodingOrder[i];
+
+                // Assign the keycode from the keybindings object
+                keybindings[i] = KeyCode.getKeyCode(keybindingsObject.get(actionToBind.toString()).toString());
+
             }
+
+            logger.info("Hotkeys loaded successfully");
 
         }
         catch (FileNotFoundException e) {

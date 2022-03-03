@@ -2,7 +2,7 @@
   "keybindings": {
     "ACCELERATE": "W",
     "REVERSE": "S",
-    "ROT_LEFT": "A",
-    "ROT_RIGHT": "D"
+    "ROTATE_RIGHT": "D",
+    "ROTATE_LEFT": "A"
   }
 }

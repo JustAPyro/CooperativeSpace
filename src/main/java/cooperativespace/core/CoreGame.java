@@ -4,12 +4,20 @@ import cooperativespace.network.NetworkServer;
 
 public class CoreGame implements Runnable {
 
+    // This array establishes which bit in the client-sent package is what action
+    public static final Action[] actionByteEncodingOrder =
+            {Action.ACCELERATE, Action.REVERSE, Action.ROTATE_RIGHT, Action.ROTATE_LEFT};
+
     private final static String ipAddress = "localhost";
     private final static int portNumber = 9875;
 
     // These variables determine how often certain method calls happen in game loop
     private final static double UPS = 60; // Updates per second
     private final static double PPS = 60;  // Pushes per second (Server)
+
+    // - - - - - - - - - - Instance Variables - - - - - - - - - -
+
+    NetworkServer server;
 
     // Game loop running
     private boolean loopRunning;
@@ -24,13 +32,13 @@ public class CoreGame implements Runnable {
     public void onStart() {
 
         // Create a new server
-        NetworkServer server = new NetworkServer(portNumber);
+        server = new NetworkServer(portNumber);
 
     }
 
     // Update positions
     public void onUpdate() {
-
+        server.get
     }
 
     // Push to clients

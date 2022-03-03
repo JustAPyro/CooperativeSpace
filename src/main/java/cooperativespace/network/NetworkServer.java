@@ -1,6 +1,7 @@
 package cooperativespace.network;
 
 import cooperativespace.core.Action;
+import cooperativespace.core.CoreGame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,20 +57,19 @@ public class NetworkServer extends Thread {
                 // Construct the client ID using address:port (Should be unique)
                 String clientID = address.toString() + ":" + port;
 
-                // Format the incoming packet
-                String inputs = String.format("%07d", Integer.parseInt(Integer.toBinaryString(incomingPacket.getData()[0])));
-                //System.out.println(inputs);
-                char[] chars = inputs.toCharArray();
-                boolean[] keyPress = new boolean[chars.length];
+                // Get the hashset of actions for this client, otherwise create/insert a new hashset
+                HashSet<Action> actions = clientPresses.computeIfAbsent(clientID, k -> new HashSet<>());
 
-                byte b = incomingPacket.getData()[0];
+                // Get the byte representing the client inputs
+                byte inputByte = incomingPacket.getData()[0];
+
+                // For each bit of the input byte, either add or remove actions from the actionset
                 for (int i = 0; i < 8; i++) {
-                        System.out.print(((b >>> i) & 1) );
-
+                    if (((inputByte >>> i) & 1) == 1)
+                        actions.add(CoreGame.actionByteEncodingOrder[i]);
+                    else
+                        actions.remove(CoreGame.actionByteEncodingOrder[i]);
                 }
-                System.out.println();
-
-                clientPresses.put(clientID, keyPress);
 
             }
 
