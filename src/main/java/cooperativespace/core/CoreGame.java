@@ -1,6 +1,8 @@
 package cooperativespace.core;
 
 import cooperativespace.network.NetworkServer;
+import cooperativespace.stage.WorldStage;
+import cooperativespace.stage.ZoneOne;
 
 
 public class CoreGame implements Runnable {
@@ -18,6 +20,10 @@ public class CoreGame implements Runnable {
 
     // - - - - - - - - - - Instance Variables - - - - - - - - - -
 
+    // this interface object holds the state information
+    WorldStage worldStage = new ZoneOne();
+
+    // The server managing network communication
     NetworkServer server;
 
     // Game loop running
@@ -35,10 +41,16 @@ public class CoreGame implements Runnable {
         // Create a new server
         server = new NetworkServer(portNumber);
 
+        // load assets for this world stage
+        worldStage.loadAssets();
+
     }
 
     // Update positions
     public void onUpdate() {
+
+        // Update the world stage
+        worldStage.update();
 
     }
 
