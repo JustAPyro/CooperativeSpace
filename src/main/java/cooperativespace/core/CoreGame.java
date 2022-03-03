@@ -2,9 +2,6 @@ package cooperativespace.core;
 
 import cooperativespace.network.NetworkServer;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class CoreGame implements Runnable {
 
@@ -42,10 +39,7 @@ public class CoreGame implements Runnable {
 
     // Update positions
     public void onUpdate() {
-        ConcurrentHashMap<String, HashSet<Action>> actions = server.getActionMap();
-        for (String player : actions.keySet()) {
-            System.out.println(actions.get(player));
-        }
+
     }
 
     // Push to clients
