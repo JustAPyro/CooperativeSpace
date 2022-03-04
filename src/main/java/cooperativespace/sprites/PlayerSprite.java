@@ -8,7 +8,7 @@ public class PlayerSprite implements Sprite {
 
     public double x;
     public double y;
-
+    double rot;
 
     public void update(HashSet<Action> actions) {
         if (actions.contains(Action.ACCELERATE) ^ actions.contains(Action.REVERSE)) {
@@ -23,11 +23,22 @@ public class PlayerSprite implements Sprite {
             else
                 y = y - 1;
         }
-        System.out.println(x + " | " + y);
     }
 
     @Override
     public void update() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+
+    @Override
+    public byte[] pack() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void unpack() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

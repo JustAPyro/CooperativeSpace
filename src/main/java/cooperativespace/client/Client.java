@@ -79,24 +79,17 @@ public class Client extends Application {
 
                 GraphicsContext gc = canvas.getGraphicsContext2D();
 
-
-
-                gc.fillRect(300, 300, 10, 10);
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 byte[] keyPackage = packageInputs(keysPressed);
                 networkClient.push(keyPackage);
 
-                short[] positions = new short[4];
                 if (networkClient.hasData()) {
                     worldStage.unpackState(networkClient.getReceivedData());
                     worldStage.draw(canvas);
                 }
-
-
-
             }
-        };
-        clock.start();
+        }; clock.start();
 
         stage.setScene(scene);
         stage.show();

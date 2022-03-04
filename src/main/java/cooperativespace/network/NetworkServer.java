@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -35,13 +36,17 @@ public class NetworkServer extends Thread {
                 String[] information = clientAddress.split(":");
                 InetAddress address = InetAddress.getByName(information[0].replace("/", ""));
                 int port = Integer.parseInt(information[1]);
-                DatagramPacket packetOut = new DatagramPacket(packet, 8,address, port);
+                DatagramPacket packetOut = new DatagramPacket(packet, packet.length ,address, port);
                 socket.send(packetOut);
 
             }
         }
-        catch (Exception e) {
-            System.out.println("Couldn't find address");
+        catch (UnknownHostException e) {
+            logger.error("Couldn't find IP Address");
+            logger.error(e.toString());
+        } catch (IOException e) {
+            logger.error("Interrupt/Error during server push");
+            logger.error(e.toString());
         }
 
     }
@@ -82,7 +87,7 @@ public class NetworkServer extends Thread {
                 // Get the byte representing the client inputs
                 byte inputByte = incomingPacket.getData()[0];
 
-                // For each bit of the input byte, either add or remove actions from the actionset
+                // For each bit of the input byte, either add or remove actions from the action set
                 for (int i = 0; i < 4; i++) {
                     if (((inputByte >>> i) & 1) == 1) {
                         actions.add(CoreGame.actionByteEncodingOrder[i]);
@@ -90,7 +95,7 @@ public class NetworkServer extends Thread {
                     else
                         actions.remove(CoreGame.actionByteEncodingOrder[i]);
                 }
-               // System.out.println(clientPresses.get(clientID).size());
+
 
             }
 

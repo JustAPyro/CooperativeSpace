@@ -12,6 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ZoneOne implements WorldStage {
 
+    // DELETED THIS
+    int x; int y;
+
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
     @Override
@@ -34,52 +37,59 @@ public class ZoneOne implements WorldStage {
 
     @Override
     public byte[] packageState() {
+
+        byte playerCount = (byte) players.size();
+        byte[] packagedState = new byte[playerCount*6+1];
+
+        packagedState[0] = playerCount;
+        int index = 1;
+
         int x =0; int y =0;
         for (PlayerSprite player : players.values()) {
-            x = (int) player.x;
-            y = (int) player.y;
+            byte[] packedPlayer = player.pack();
+            System.arraycopy(packedPlayer, 0, packagedState, index, packedPlayer.length);
         }
 
-        byte[] packagedState = new byte[8];
-        packageInsert(packagedState, 0, x);
-        packageInsert(packagedState, 4, y);
+        packagedState[0] = playerCount;
+        /*
+        byte[] byteX = intToByteArray(x);
+        byte[] byteY = intToByteArray(y);
+
+        System.arraycopy(byteX, 0, packagedState, 0, byteX.length);
+        System.arraycopy(byteY, 0, packagedState, 4, byteY.length);
+*/
 
         return packagedState;
 
     }
 
     public void unpackState(byte[] packedState) {
-        int[] integers = new int[2];
-        int x = (
-                (int) (packedState[0] >> 24) +
-                        (int) (packedState[1] >> 16) +
-                        (int) (packedState[2] >> 8) +
-                        (int) (packedState[3])
-        );
-        int y = (
-                (int) (packedState[4] >> 24) +
-                        (int) (packedState[5] >> 16) +
-                        (int) (packedState[6] >> 8) +
-                        (int) (packedState[7])
-        );
 
-        for (PlayerSprite player : players.values()) {
-            player.x = x;
-            player.y = y;
-        }
+        byte[] byteX = new byte[4];
+        byte[] byteY = new byte[4];
 
+        /*
+        System.arraycopy(packedState, 4, byteX, 0, byteX.length);
+        System.arraycopy(packedState, 0, byteY, 0, byteY.length);
 
-        System.out.println(x + " | " + y);
+        int x = byteArrayToInt(byteX);
+        int y = byteArrayToInt(byteY);
+
+        this.x = x;
+        this.y = y;
+    */
+
+        System.out.println(packedState[0]);
     }
 
 
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.fillRect(0, 0, 10, 10);
-        for (PlayerSprite player : players.values()) {
-            gc.fillRect(player.x,player.y,20, 20);
-        }
+        gc.fillRect(this.x, this.y, 10, 10);
+
     }
+
+
 
     private void packageInsert(byte[] b, int position, int toInsert) {
         for (int i = 0; i  < 4; i++) {
