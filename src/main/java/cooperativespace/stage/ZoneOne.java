@@ -39,15 +39,16 @@ public class ZoneOne implements WorldStage {
     public byte[] packageState() {
 
         byte playerCount = (byte) players.size();
-        byte[] packagedState = new byte[playerCount*6+1];
+        byte[] packagedState = new byte[(playerCount*6)+1+5];
 
         packagedState[0] = playerCount;
-        int index = 1;
+        int index = 0;
 
         int x =0; int y =0;
         for (PlayerSprite player : players.values()) {
             byte[] packedPlayer = player.pack();
-            System.arraycopy(packedPlayer, 0, packagedState, index, packedPlayer.length);
+            System.arraycopy(packedPlayer, 0, packagedState, 1+index*6, packedPlayer.length);
+            index++;
         }
 
         /*
@@ -65,6 +66,7 @@ public class ZoneOne implements WorldStage {
     public void unpackState(byte[] packedState) {
 
         int playerCount = packedState[0];
+        System.out.println(packedState.length);
 
         for (int i = 0; i < playerCount; i++) {
 

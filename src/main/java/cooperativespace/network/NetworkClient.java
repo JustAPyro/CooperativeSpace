@@ -55,8 +55,8 @@ public class NetworkClient extends Thread {
     public void run() {
         try {
 
-            final byte[] incomingBuffer = new byte[8];
-            final DatagramPacket incomingPacket = new DatagramPacket(incomingBuffer, 8);
+            final byte[] incomingBuffer = new byte[25];
+            final DatagramPacket incomingPacket = new DatagramPacket(incomingBuffer, incomingBuffer.length);
 
             while (true) {
                 socket.receive(incomingPacket);
