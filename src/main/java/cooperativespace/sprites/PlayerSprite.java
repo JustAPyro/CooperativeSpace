@@ -1,6 +1,7 @@
 package cooperativespace.sprites;
 
 import cooperativespace.core.Action;
+import cooperativespace.utilities.UtilByte;
 
 import java.util.HashSet;
 
@@ -34,7 +35,17 @@ public class PlayerSprite implements Sprite {
 
     @Override
     public byte[] pack() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        byte[] packet = new byte[6];
+
+        byte[] bRot = UtilByte.shortToByteArray((short) rot);
+        byte[] bX = UtilByte.shortToByteArray((short) x);
+        byte[] bY = UtilByte.shortToByteArray((short) y);
+
+        System.arraycopy(bX, 0, packet, 0, 2);
+        System.arraycopy(bY, 0, packet, 2, 2);
+        System.arraycopy(bRot, 0, packet, 4, 2);
+
+        return packet;
     }
 
     @Override

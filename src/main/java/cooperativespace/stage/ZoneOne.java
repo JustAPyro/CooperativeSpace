@@ -50,7 +50,6 @@ public class ZoneOne implements WorldStage {
             System.arraycopy(packedPlayer, 0, packagedState, index, packedPlayer.length);
         }
 
-        packagedState[0] = playerCount;
         /*
         byte[] byteX = intToByteArray(x);
         byte[] byteY = intToByteArray(y);
