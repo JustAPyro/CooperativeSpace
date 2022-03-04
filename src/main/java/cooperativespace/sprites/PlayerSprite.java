@@ -2,6 +2,7 @@ package cooperativespace.sprites;
 
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
+import javafx.scene.canvas.Canvas;
 
 import java.util.HashSet;
 
@@ -31,6 +32,10 @@ public class PlayerSprite implements Sprite {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public void draw(Canvas canvas) {
+        canvas.getGraphicsContext2D().fillRect(x, y, 20, 20);
+    }
 
 
     @Override
@@ -49,7 +54,20 @@ public class PlayerSprite implements Sprite {
     }
 
     @Override
-    public void unpack() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void unpack(byte[] playerPacket) {
+
+        byte[] bX = new byte[2];
+        byte[] bY = new byte[2];
+        byte[] bRot = new byte[2];
+
+        System.arraycopy(playerPacket, 0, bX, 0, 2);
+        System.arraycopy(playerPacket, 2, bY, 0, 2);
+        System.arraycopy(playerPacket, 4, bRot, 0, 2);
+
+        // TODO : FIX THIS AT SOME POINT< AXIS ARE MESSED UP
+        x = UtilByte.byteArrayToShort(bY);
+        y = UtilByte.byteArrayToShort(bX);
+        rot = UtilByte.byteArrayToShort(bRot);
+
     }
 }

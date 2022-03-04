@@ -64,8 +64,17 @@ public class ZoneOne implements WorldStage {
 
     public void unpackState(byte[] packedState) {
 
-        byte[] byteX = new byte[4];
-        byte[] byteY = new byte[4];
+        int playerCount = packedState[0];
+
+        for (int i = 0; i < playerCount; i++) {
+
+            byte[] playerPacket = new byte[6];
+            System.arraycopy(packedState, 1+i*6, playerPacket, 0, 6);
+
+            PlayerSprite player = players.computeIfAbsent(String.valueOf(i), k -> new PlayerSprite());
+            player.unpack(playerPacket);
+        }
+
 
         /*
         System.arraycopy(packedState, 4, byteX, 0, byteX.length);
@@ -83,8 +92,8 @@ public class ZoneOne implements WorldStage {
 
 
     public void draw(Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.fillRect(this.x, this.y, 10, 10);
+        for (PlayerSprite player : players.values())
+            player.draw(canvas);
 
     }
 
