@@ -4,6 +4,8 @@ import javafx.scene.canvas.Canvas;
 
 public interface Sprite {
 
+    public void load();
+
     public void update();
 
     public void draw(Canvas canvas);

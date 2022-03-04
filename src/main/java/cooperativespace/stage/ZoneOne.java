@@ -12,9 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ZoneOne implements WorldStage {
 
-    // DELETED THIS
-    int x; int y;
-
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
     @Override

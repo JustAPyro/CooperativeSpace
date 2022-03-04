@@ -3,14 +3,20 @@ package cooperativespace.sprites;
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 
 import java.util.HashSet;
 
 public class PlayerSprite implements Sprite {
 
+    private Image image;
     public double x;
     public double y;
     double rot;
+
+    public PlayerSprite() {
+        load();
+    }
 
     public void update(HashSet<Action> actions) {
         if (actions.contains(Action.ACCELERATE) ^ actions.contains(Action.REVERSE)) {
@@ -28,13 +34,19 @@ public class PlayerSprite implements Sprite {
     }
 
     @Override
+    public void load() {
+        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png");
+    }
+
+    @Override
     public void update() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.getGraphicsContext2D().fillRect(x, y, 20, 20);
+        //canvas.getGraphicsContext2D().drawImage(image, x, y);
+        canvas.getGraphicsContext2D().fillRect(x, y, 5, 5);
     }
 
 
