@@ -3,6 +3,8 @@ package cooperativespace.stage;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
 import cooperativespace.sprites.Sprite;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,6 +46,39 @@ public class ZoneOne implements WorldStage {
 
         return packagedState;
 
+    }
+
+    public void unpackState(byte[] packedState) {
+        int[] integers = new int[2];
+        int x = (
+                (int) (packedState[0] >> 24) +
+                        (int) (packedState[1] >> 16) +
+                        (int) (packedState[2] >> 8) +
+                        (int) (packedState[3])
+        );
+        int y = (
+                (int) (packedState[4] >> 24) +
+                        (int) (packedState[5] >> 16) +
+                        (int) (packedState[6] >> 8) +
+                        (int) (packedState[7])
+        );
+
+        for (PlayerSprite player : players.values()) {
+            player.x = x;
+            player.y = y;
+        }
+
+
+        System.out.println(x + " | " + y);
+    }
+
+
+    public void draw(Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.fillRect(0, 0, 10, 10);
+        for (PlayerSprite player : players.values()) {
+            gc.fillRect(player.x,player.y,20, 20);
+        }
     }
 
     private void packageInsert(byte[] b, int position, int toInsert) {

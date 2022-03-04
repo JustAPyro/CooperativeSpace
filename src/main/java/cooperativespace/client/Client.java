@@ -45,19 +45,21 @@ public class Client extends Application {
 
     WorldStage worldStage = new ZoneOne();
 
+    Canvas canvas;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         // Set the title
         stage.setTitle("Cooperative Space");
 
         // Add the main canvas
         VBox box = new VBox();
-        Canvas canvas = new Canvas(stage.getWidth(), stage.getHeight());
+        canvas = new Canvas(599, 599);
         box.getChildren().add(canvas);
 
         // Load in the hotkey configuration
@@ -71,24 +73,26 @@ public class Client extends Application {
         // Create a network
         networkClient = new NetworkClient(ipAddress, portNumber);
 
-        StringBuilder binaryByte = new StringBuilder();
         AnimationTimer clock = new AnimationTimer() {
             @Override
             public void handle(long l) {
 
+                GraphicsContext gc = canvas.getGraphicsContext2D();
+
+
+
+                gc.fillRect(300, 300, 10, 10);
 
                 byte[] keyPackage = packageInputs(keysPressed);
                 networkClient.push(keyPackage);
 
                 short[] positions = new short[4];
                 if (networkClient.hasData()) {
-
+                    worldStage.unpackState(networkClient.getReceivedData());
+                    worldStage.draw(canvas);
                 }
 
-                GraphicsContext gc = canvas.getGraphicsContext2D();
 
-                // Clear the canvas
-                gc.clearRect(0,  0, canvas.getWidth(), canvas.getHeight());
 
             }
         };
