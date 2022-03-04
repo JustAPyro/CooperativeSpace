@@ -29,6 +29,23 @@ public class NetworkServer extends Thread {
         this.start();
     }
 
+    public void push(byte[] packet) {
+        try {
+            for (String clientAddress : clientPresses.keySet()) {
+                String[] information = clientAddress.split(":");
+                InetAddress address = InetAddress.getByName(information[0].replace("/", ""));
+                int port = Integer.parseInt(information[1]);
+                DatagramPacket packetOut = new DatagramPacket(packet, 8,address, port);
+                socket.send(packetOut);
+
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Couldn't find address");
+        }
+
+    }
+
     @Override
     public void run() {
 

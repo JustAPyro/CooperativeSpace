@@ -47,13 +47,14 @@ public class CoreGame implements Runnable {
     public void onUpdate() {
 
         // Update the world stage
-        worldStage.update();
+        worldStage.updatePlayers(server.getActionMap());
 
     }
 
     // Push to clients
     public void onPush() {
-
+        byte[] state = worldStage.packageState();
+        server.push(state);
     }
 
     @Override

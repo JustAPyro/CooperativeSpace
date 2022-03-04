@@ -16,6 +16,7 @@ public class NetworkClient extends Thread {
     private InetAddress ipAddress;
     private int portNumber;
 
+    private byte[] receivedData;
     private byte byteOut;
 
     public NetworkClient(String ipAddress, int portNumber) {
@@ -50,7 +51,22 @@ public class NetworkClient extends Thread {
         }
     }
 
+    @Override
+    public void run() {
+        try {
 
+            final byte[] incomingBuffer = new byte[8];
+            final DatagramPacket incomingPacket = new DatagramPacket(incomingBuffer, 8);
+
+            while (true) {
+                socket.receive(incomingPacket);
+                receivedData = incomingPacket.getData();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private InetAddress parseAddress(String ipAddress) throws UnknownHostException {
@@ -64,6 +80,14 @@ public class NetworkClient extends Thread {
             throw new UnknownHostException("Couldn't parse IP Address");
 
         return possibleIPs[0];
+    }
+
+    public boolean hasData() {
+        return receivedData != null;
+    }
+
+    public byte[] getReceivedData() {
+        return receivedData;
     }
 
 }

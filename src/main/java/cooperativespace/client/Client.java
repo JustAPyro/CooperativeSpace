@@ -4,6 +4,8 @@ import cooperativespace.core.Action;
 import cooperativespace.core.CoreGame;
 import cooperativespace.network.NetworkClient;
 
+import cooperativespace.stage.WorldStage;
+import cooperativespace.stage.ZoneOne;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -41,6 +43,8 @@ public class Client extends Application {
     private String ipAddress = "localhost";
     private int portNumber = 9875;
 
+    WorldStage worldStage = new ZoneOne();
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -77,8 +81,9 @@ public class Client extends Application {
                 networkClient.push(keyPackage);
 
                 short[] positions = new short[4];
-                //if (networkClient.hasData())
-                //    positions = PongGame.decodeState(networkClient.getReceivedData());
+                if (networkClient.hasData()) {
+
+                }
 
                 GraphicsContext gc = canvas.getGraphicsContext2D();
 
