@@ -1,10 +1,10 @@
-package cooperativespace.components;
+package cooperativespace.sprites.components;
 
-import cooperativespace.commands.Command;
-import cooperativespace.commands.movement.AccelerateCommand;
-import cooperativespace.commands.movement.ReverseCommand;
-import cooperativespace.commands.movement.RotateLeftCommand;
-import cooperativespace.commands.movement.RotateRightCommand;
+import cooperativespace.sprites.commands.Command;
+import cooperativespace.sprites.commands.movement.AccelerateCommand;
+import cooperativespace.sprites.commands.movement.ReverseCommand;
+import cooperativespace.sprites.commands.movement.RotateLeftCommand;
+import cooperativespace.sprites.commands.movement.RotateRightCommand;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
 

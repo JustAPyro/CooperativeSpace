@@ -1,9 +1,9 @@
 package cooperativespace.sprites;
 
-import cooperativespace.commands.Command;
-import cooperativespace.components.ActionComponent;
-import cooperativespace.components.InputComponent;
-import cooperativespace.components.PhysicsComponent;
+import cooperativespace.sprites.commands.Command;
+import cooperativespace.sprites.components.ActionComponent;
+import cooperativespace.sprites.components.InputComponent;
+import cooperativespace.sprites.components.PhysicsComponent;
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
 import javafx.scene.canvas.Canvas;
@@ -19,8 +19,6 @@ public class PlayerSprite extends Sprite {
     private final PhysicsComponent physicsComponent = new PhysicsComponent();
 
     private Image image;
-    public double x = 300;
-    public double y = 300;
 
     public PlayerSprite() {
         load();
@@ -33,6 +31,9 @@ public class PlayerSprite extends Sprite {
 
         // update our action component so it can execute commands
         actionComponent.update(commands);
+
+        // Update the physics component
+        physicsComponent.update(this);
 
 
 
@@ -55,7 +56,7 @@ public class PlayerSprite extends Sprite {
         gc.save();
 
 
-        gc.translate(x+image.getWidth()/2, y+image.getWidth()/2);
+        gc.translate(getXPosition()+image.getWidth()/2, getYPosition()+image.getWidth()/2);
         gc.rotate(getRotation());
         gc.translate(-image.getHeight()/2, -image.getWidth()/2);
 
@@ -70,8 +71,8 @@ public class PlayerSprite extends Sprite {
         byte[] packet = new byte[6];
 
         byte[] bRot = UtilByte.shortToByteArray((short) getRotation());
-        byte[] bX = UtilByte.shortToByteArray((short) x);
-        byte[] bY = UtilByte.shortToByteArray((short) y);
+        byte[] bX = UtilByte.shortToByteArray((short) getXPosition());
+        byte[] bY = UtilByte.shortToByteArray((short) getYPosition());
 
         System.arraycopy(bX, 0, packet, 0, 2);
         System.arraycopy(bY, 0, packet, 2, 2);
@@ -92,8 +93,8 @@ public class PlayerSprite extends Sprite {
         System.arraycopy(playerPacket, 4, bRot, 0, 2);
 
         // TODO : FIX THIS AT SOME POINT< AXIS ARE MESSED UP
-        x = UtilByte.byteArrayToShort(bY);
-        y = UtilByte.byteArrayToShort(bX);
+        setXPosition(UtilByte.byteArrayToShort(bX));
+        setYPosition(UtilByte.byteArrayToShort(bY));
         setRotation(UtilByte.byteArrayToShort(bRot));
 
     }
