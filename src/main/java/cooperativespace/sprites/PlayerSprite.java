@@ -14,16 +14,30 @@ import java.util.HashSet;
 
 public class PlayerSprite extends Sprite {
 
+    // - - - - - - - - - - Instance Methods - - - - - - - - - -
+
+    // - - - - - Components - - - - -
+
+    // This component handles input, can be switched out for, example, an AI input
     private final InputComponent inputComponent = new InputComponent();
+
+    // This component handles processing commands into action, I.E. a sprite that "does something" (like movement)
     private final ActionComponent actionComponent = new ActionComponent(this);
+
+    // This component handles the physics, which includes updating game positions and checking for collisions
     private final PhysicsComponent physicsComponent = new PhysicsComponent();
 
+    // - - - - - Other - - - - -
+
+    // The image that represents the sprite
     private Image image;
 
+    // Constructor just calls load (Note that eventually load() should be called on a separate thread on loading screens
     public PlayerSprite() {
         load();
     }
 
+    // Updates the player sprite using the provided action/inputs
     public void update(HashSet<Action> actions) {
 
         // Process inputs and get commands
@@ -35,21 +49,16 @@ public class PlayerSprite extends Sprite {
         // Update the physics component
         physicsComponent.update(this);
 
-
-
     }
 
+    // Loads any resources necessary to run the player
     @Override
     public void load() {
 
         image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png", 100, 100, true, true);
     }
 
-    @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    // How to draw the player
     @Override
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -65,7 +74,7 @@ public class PlayerSprite extends Sprite {
         gc.restore();
     }
 
-
+    // IMPORTANT : This is how the server packs the player information to send to client
     @Override
     public byte[] pack() {
         byte[] packet = new byte[6];
@@ -81,6 +90,7 @@ public class PlayerSprite extends Sprite {
         return packet;
     }
 
+    // IMPORTANT : This is how the client UNPACKS the player info and loads it into local objects
     @Override
     public void unpack(byte[] playerPacket) {
 

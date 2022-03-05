@@ -18,7 +18,9 @@ public abstract class Sprite implements Actor, Physics {
 
     abstract public void load();
 
-    abstract public void update();
+    public void update() {
+
+    }
 
     abstract public void draw(Canvas canvas);
 

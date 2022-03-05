@@ -59,7 +59,7 @@ public class Client extends Application {
 
         // Add the main canvas
         VBox box = new VBox();
-        canvas = new Canvas(599, 599);
+        canvas = new Canvas(1000, 700);
         box.getChildren().add(canvas);
 
         // Load in the hotkey configuration
