@@ -3,6 +3,7 @@ package cooperativespace.sprites;
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.HashSet;
@@ -12,7 +13,7 @@ public class PlayerSprite implements Sprite {
     private Image image;
     public double x;
     public double y;
-    double rot;
+    double rot = 23;
 
     public PlayerSprite() {
         load();
@@ -35,7 +36,8 @@ public class PlayerSprite implements Sprite {
 
     @Override
     public void load() {
-        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png");
+
+        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png", 100, 100, true, true);
     }
 
     @Override
@@ -45,8 +47,15 @@ public class PlayerSprite implements Sprite {
 
     @Override
     public void draw(Canvas canvas) {
-        //canvas.getGraphicsContext2D().drawImage(image, x, y);
-        canvas.getGraphicsContext2D().fillRect(x, y, 5, 5);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        rot = 100;
+        gc.save();
+
+        gc.translate(x-image.getWidth()/2, y-image.getHeight()/2);
+        gc.rotate(rot);
+        //
+        gc.drawImage(image, 0, 0);
+        gc.restore();
     }
 
 

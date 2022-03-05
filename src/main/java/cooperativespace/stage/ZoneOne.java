@@ -63,7 +63,6 @@ public class ZoneOne implements WorldStage {
     public void unpackState(byte[] packedState) {
 
         int playerCount = packedState[0];
-        System.out.println(packedState.length);
 
         for (int i = 0; i < playerCount; i++) {
 
@@ -86,7 +85,6 @@ public class ZoneOne implements WorldStage {
         this.y = y;
     */
 
-        System.out.println(packedState[0]);
     }
 
 
