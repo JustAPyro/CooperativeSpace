@@ -1,6 +1,9 @@
 package cooperativespace.sprites;
 
-import cooperativespace.components.ActorComponent;
+import cooperativespace.commands.Command;
+import cooperativespace.components.ActionComponent;
+import cooperativespace.components.InputComponent;
+import cooperativespace.components.PhysicsComponent;
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
 import javafx.scene.canvas.Canvas;
@@ -9,21 +12,30 @@ import javafx.scene.image.Image;
 
 import java.util.HashSet;
 
-public class PlayerSprite extends GameActor implements Sprite{
+public class PlayerSprite extends Sprite {
 
-    private ActorComponent actorComponent = new ActorComponent();
+    private final InputComponent inputComponent = new InputComponent();
+    private final ActionComponent actionComponent = new ActionComponent(this);
+    private final PhysicsComponent physicsComponent = new PhysicsComponent();
 
     private Image image;
-    public double x;
-    public double y;
-    double rot = 23;
+    public double x = 30;
+    public double y = 30;
 
     public PlayerSprite() {
         load();
     }
 
     public void update(HashSet<Action> actions) {
-        actorComponent.update(this, actions);
+
+        // Process inputs and get commands
+        HashSet<Command> commands = inputComponent.update(this, actions);
+
+        // update our action component so it can execute commands
+        actionComponent.update(commands);
+
+
+
     }
 
     @Override
@@ -40,11 +52,10 @@ public class PlayerSprite extends GameActor implements Sprite{
     @Override
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        rot = 100;
         gc.save();
 
         gc.translate(x-image.getWidth()/2, y-image.getHeight()/2);
-        gc.rotate(rot);
+        gc.rotate(getRotation());
         //
         gc.drawImage(image, 0, 0);
         gc.restore();
@@ -55,7 +66,7 @@ public class PlayerSprite extends GameActor implements Sprite{
     public byte[] pack() {
         byte[] packet = new byte[6];
 
-        byte[] bRot = UtilByte.shortToByteArray((short) rot);
+        byte[] bRot = UtilByte.shortToByteArray((short) getRotation());
         byte[] bX = UtilByte.shortToByteArray((short) x);
         byte[] bY = UtilByte.shortToByteArray((short) y);
 
@@ -80,30 +91,7 @@ public class PlayerSprite extends GameActor implements Sprite{
         // TODO : FIX THIS AT SOME POINT< AXIS ARE MESSED UP
         x = UtilByte.byteArrayToShort(bY);
         y = UtilByte.byteArrayToShort(bX);
-        rot = UtilByte.byteArrayToShort(bRot);
+        setRotation(UtilByte.byteArrayToShort(bRot));
 
-    }
-
-    // - - - - - Game Actor Methods - - - - -
-
-
-    @Override
-    public void accelerate() {
-        y--;
-    }
-
-    @Override
-    public void reverse() {
-        y++;
-    }
-
-    @Override
-    public void rotateRight() {
-        x++;
-    }
-
-    @Override
-    public void rotateLeft() {
-        x--;
     }
 }

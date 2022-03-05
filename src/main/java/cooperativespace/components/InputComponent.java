@@ -10,7 +10,7 @@ import cooperativespace.sprites.PlayerSprite;
 
 import java.util.HashSet;
 
-public class ActorComponent {
+public class InputComponent {
 
     HashSet<Command> commands = new HashSet<>();
     AccelerateCommand accelerate = new AccelerateCommand();
@@ -18,7 +18,7 @@ public class ActorComponent {
     RotateRightCommand right = new RotateRightCommand();
     RotateLeftCommand left = new RotateLeftCommand();
 
-    public void update(PlayerSprite player, HashSet<Action> actions) {
+    public HashSet<Command> update(PlayerSprite player, HashSet<Action> actions) {
 
         // Start by clearing the command set
         commands.clear();
@@ -39,8 +39,8 @@ public class ActorComponent {
         if (actions.contains(Action.ROTATE_LEFT) && !actions.contains(Action.ROTATE_RIGHT))
             commands.add(left);
 
-        // Execute all commands added
-        for (Command command : commands)
-            command.execute(player);
+        // Return the commands
+        return commands;
+
     }
 }

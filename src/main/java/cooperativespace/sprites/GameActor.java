@@ -1,21 +1,17 @@
 package cooperativespace.sprites;
 
-public abstract class GameActor {
+public interface GameActor {
 
-    public void accelerate() {
-        throw new UnsupportedOperationException("Forward not supported");
-    }
+    double getSpeed();
 
-    public void reverse() {
-        throw new UnsupportedOperationException("Reverse Not Supported");
-    }
+    void setSpeed(double speed);
 
-    public void rotateRight() {
-        throw new UnsupportedOperationException("Rotate Right Not Supported");
-    }
+    void modifySpeed(double increment);
 
-    public void rotateLeft() {
-        throw new UnsupportedOperationException("Rotate Left Not Supported");
-    }
+    double getRotation();
+
+    void setRotation();
+
+    void modifyRotation();
 
 }
