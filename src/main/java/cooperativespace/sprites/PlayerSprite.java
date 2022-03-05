@@ -1,5 +1,6 @@
 package cooperativespace.sprites;
 
+import cooperativespace.components.ActorComponent;
 import cooperativespace.core.Action;
 import cooperativespace.utilities.UtilByte;
 import javafx.scene.canvas.Canvas;
@@ -8,7 +9,9 @@ import javafx.scene.image.Image;
 
 import java.util.HashSet;
 
-public class PlayerSprite implements Sprite {
+public class PlayerSprite implements Sprite{
+
+    private ActorComponent actorComponent = new ActorComponent();
 
     private Image image;
     public double x;
@@ -20,18 +23,7 @@ public class PlayerSprite implements Sprite {
     }
 
     public void update(HashSet<Action> actions) {
-        if (actions.contains(Action.ACCELERATE) ^ actions.contains(Action.REVERSE)) {
-            if (actions.contains(Action.ACCELERATE))
-                x = x - 1;
-            else
-                x = x + 1;
-        }
-        if (actions.contains(Action.ROTATE_LEFT) ^ actions.contains(Action.ROTATE_RIGHT)) {
-            if (actions.contains(Action.ROTATE_RIGHT))
-                y = y + 1;
-            else
-                y = y - 1;
-        }
+        actorComponent.update(this, actions);
     }
 
     @Override
