@@ -19,8 +19,8 @@ public class PlayerSprite extends Sprite {
     private final PhysicsComponent physicsComponent = new PhysicsComponent();
 
     private Image image;
-    public double x = 30;
-    public double y = 30;
+    public double x = 300;
+    public double y = 300;
 
     public PlayerSprite() {
         load();
@@ -54,8 +54,11 @@ public class PlayerSprite extends Sprite {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.save();
 
-        gc.translate(x-image.getWidth()/2, y-image.getHeight()/2);
+
+        gc.translate(x+image.getWidth()/2, y+image.getWidth()/2);
         gc.rotate(getRotation());
+        gc.translate(-image.getHeight()/2, -image.getWidth()/2);
+
         //
         gc.drawImage(image, 0, 0);
         gc.restore();

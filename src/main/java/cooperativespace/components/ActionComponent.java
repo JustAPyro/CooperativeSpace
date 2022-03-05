@@ -11,8 +11,8 @@ public class ActionComponent {
 
     Sprite actor;
 
-    double acceleration;
-    double turningSpeed;
+    private final double ACCELERATION = 1;
+    private final double TURNING_SPEED = 1;
 
     public ActionComponent(Sprite actor) {
         this.actor = actor;
@@ -24,19 +24,19 @@ public class ActionComponent {
     }
 
     public void accelerate() {
-        actor.modifySpeed(acceleration);
+        actor.modifySpeed(ACCELERATION);
     }
 
     public void reverse() {
-        actor.modifySpeed(-1*acceleration);
+        actor.modifySpeed(-1*ACCELERATION);
     }
 
     public void rotateRight() {
-        actor.modifyRotation(turningSpeed);
+        actor.modifyRotation(TURNING_SPEED);
     }
 
     public void rotateLeft() {
-        actor.modifyRotation(-1*turningSpeed);
+        actor.modifyRotation(-1*TURNING_SPEED);
     }
 
 }
