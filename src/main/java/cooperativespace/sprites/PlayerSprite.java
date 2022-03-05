@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 
 import java.util.HashSet;
 
-public class PlayerSprite implements Sprite{
+public class PlayerSprite extends GameActor implements Sprite{
 
     private ActorComponent actorComponent = new ActorComponent();
 
@@ -82,5 +82,28 @@ public class PlayerSprite implements Sprite{
         y = UtilByte.byteArrayToShort(bX);
         rot = UtilByte.byteArrayToShort(bRot);
 
+    }
+
+    // - - - - - Game Actor Methods - - - - -
+
+
+    @Override
+    public void accelerate() {
+        y--;
+    }
+
+    @Override
+    public void reverse() {
+        y++;
+    }
+
+    @Override
+    public void rotateRight() {
+        x++;
+    }
+
+    @Override
+    public void rotateLeft() {
+        x--;
     }
 }
