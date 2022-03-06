@@ -55,7 +55,8 @@ public class PlayerSprite extends Sprite {
     @Override
     public void load() {
 
-        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png", 100, 100, true, true);
+        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png",
+                64, 64, true, true);
     }
 
     // How to draw the player
@@ -63,7 +64,6 @@ public class PlayerSprite extends Sprite {
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.save();
-
 
         gc.translate(getXPosition()+image.getWidth()/2, getYPosition()+image.getWidth()/2);
         gc.rotate(getRotation());

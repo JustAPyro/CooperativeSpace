@@ -12,7 +12,7 @@ public class ActionComponent {
 
     Sprite actor;
 
-    private final double ACCELERATION = 0.01;
+    private final double ACCELERATION = 0.0025;
     private final double TURNING_SPEED = 2;
 
     public ActionComponent(Sprite actor) {

@@ -1,10 +1,12 @@
 package cooperativespace.stage;
 
+import cooperativespace.UI.HUD;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
 import cooperativespace.sprites.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,10 +14,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ZoneOne implements WorldStage {
 
+    Image background;
+
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
     @Override
     public void loadAssets() {
+
+        background = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\textures\\zone_one.png",
+                512, 512, true, true);
+
 
     }
 
@@ -89,8 +97,16 @@ public class ZoneOne implements WorldStage {
 
 
     public void draw(Canvas canvas) {
+
+        canvas.getGraphicsContext2D().drawImage(background, 0, 0);
+        canvas.getGraphicsContext2D().drawImage(background, 512, 0);
+        canvas.getGraphicsContext2D().drawImage(background, 0, 512);
+        canvas.getGraphicsContext2D().drawImage(background, 512, 512);
+
         for (PlayerSprite player : players.values())
             player.draw(canvas);
+
+        HUD.draw(canvas);
 
     }
 

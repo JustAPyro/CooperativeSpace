@@ -39,6 +39,12 @@ public class InputComponent {
         if (actions.contains(Action.ROTATE_LEFT) && !actions.contains(Action.ROTATE_RIGHT))
             commands.add(left);
 
+        if (actions.contains(Action.ABILITY_ONE))
+            System.out.println("Fire");
+
+        if (actions.contains(Action.ABILITY_TWO))
+            System.out.println("Shields!");
+
         // Return the commands
         return commands;
 

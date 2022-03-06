@@ -88,7 +88,7 @@ public class NetworkServer extends Thread {
                 byte inputByte = incomingPacket.getData()[0];
 
                 // For each bit of the input byte, either add or remove actions from the action set
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 8; i++) {
                     if (((inputByte >>> i) & 1) == 1) {
                         actions.add(CoreGame.actionByteEncodingOrder[i]);
                     }

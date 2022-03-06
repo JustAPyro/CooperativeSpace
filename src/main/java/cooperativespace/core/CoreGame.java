@@ -9,7 +9,8 @@ public class CoreGame implements Runnable {
 
     // This array establishes which bit in the client-sent package is what action
     public static final Action[] actionByteEncodingOrder =
-            {Action.ACCELERATE, Action.REVERSE, Action.ROTATE_RIGHT, Action.ROTATE_LEFT};
+            {Action.ACCELERATE, Action.REVERSE, Action.ROTATE_RIGHT, Action.ROTATE_LEFT,
+            Action.ABILITY_ONE, Action.ABILITY_TWO, Action.ABILITY_THREE, Action.ABILITY_FOUR};
 
     private final static String ipAddress = "localhost";
     private final static int portNumber = 9875;

@@ -36,7 +36,7 @@ public class Client extends Application {
     private final HashSet<KeyCode> keysPressed = new HashSet<>();
 
     // This is the list of keys that will actually be packed & sent to server
-    private static final KeyCode[] keybindings = new KeyCode[4];
+    private static final KeyCode[] keybindings = new KeyCode[8];
 
     // Variables for networking
     private NetworkClient networkClient;
@@ -72,6 +72,9 @@ public class Client extends Application {
 
         // Create a network
         networkClient = new NetworkClient(ipAddress, portNumber);
+
+        // Load the stage
+        worldStage.loadAssets();
 
         AnimationTimer clock = new AnimationTimer() {
             @Override

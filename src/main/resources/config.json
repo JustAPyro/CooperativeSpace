@@ -3,6 +3,10 @@
     "ACCELERATE": "W",
     "REVERSE": "S",
     "ROTATE_RIGHT": "D",
-    "ROTATE_LEFT": "A"
+    "ROTATE_LEFT": "A",
+    "ABILITY_ONE": "E",
+    "ABILITY_TWO": "Q",
+    "ABILITY_THREE": "R",
+    "ABILITY_FOUR": "F"
   }
 }
