@@ -12,6 +12,9 @@ public class HUD {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.save();
 
+        gc.setFill(Color.LIGHTGRAY);
+        gc.fillRect(20, 20, 210, 38);
+
         gc.setFill(Color.RED);
         gc.fillRect(25, 25, 200, 14);
 
