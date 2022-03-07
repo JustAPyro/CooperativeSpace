@@ -8,17 +8,28 @@ import java.net.*;
 
 public class NetworkClient extends Thread {
 
+    // declare a static logger to track functionality
     private static final Logger logger = LogManager.getLogger(NetworkClient.class);
 
+    // The UDP socket and packet buffer
     private DatagramSocket socket;
     private DatagramPacket packet;
 
+    // Internet (IP) address and port number
     private InetAddress ipAddress;
     private int portNumber;
 
+    // Buffer for the received data and the sending data
     private byte[] receivedData;
     private byte byteOut;
 
+    /**
+     * Parses and assigns the the ip and port number, then launches the listening thread to
+     * collect new input.
+     *
+     * @param ipAddress The IP of server (or "localhost" for that)
+     * @param portNumber The port number you want to target
+     */
     public NetworkClient(String ipAddress, int portNumber) {
         try {
 
@@ -41,6 +52,10 @@ public class NetworkClient extends Thread {
         }
     }
 
+    /**
+     * Note: This method doesn't get called on the server thread
+     * @param payload The bytes you want to send
+     */
     public void push(byte[] payload) {
         try {
             packet = new DatagramPacket(payload, payload.length, ipAddress, portNumber);
