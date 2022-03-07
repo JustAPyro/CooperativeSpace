@@ -3,9 +3,8 @@ package cooperativespace.stage;
 import cooperativespace.UI.HUD;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
-import cooperativespace.sprites.Sprite;
+import cooperativespace.sprites.SpaceRock;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.HashMap;
@@ -18,12 +17,15 @@ public class ZoneOne implements WorldStage {
 
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
+    SpaceRock testRock = new SpaceRock();
+
     @Override
     public void loadAssets() {
 
         background = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\textures\\zone_one.png",
                 512, 512, true, true);
 
+        testRock.load();
 
     }
 
@@ -37,7 +39,7 @@ public class ZoneOne implements WorldStage {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        testRock.update();
     }
 
     @Override
@@ -80,18 +82,6 @@ public class ZoneOne implements WorldStage {
             PlayerSprite player = players.computeIfAbsent(String.valueOf(i), k -> new PlayerSprite());
             player.unpack(playerPacket);
         }
-
-
-        /*
-        System.arraycopy(packedState, 4, byteX, 0, byteX.length);
-        System.arraycopy(packedState, 0, byteY, 0, byteY.length);
-
-        int x = byteArrayToInt(byteX);
-        int y = byteArrayToInt(byteY);
-
-        this.x = x;
-        this.y = y;
-    */
 
     }
 
