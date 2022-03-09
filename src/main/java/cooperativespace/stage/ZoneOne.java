@@ -7,6 +7,7 @@ import cooperativespace.sprites.SpaceRock;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,7 +23,8 @@ public class ZoneOne implements WorldStage {
     @Override
     public void loadAssets() {
 
-        background = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\textures\\zone_one.png",
+        System.out.println(new File(".").getAbsolutePath());
+        background = new Image("C:\\Users\\Luke\\Programming\\Java\\CooperativeSpace\\src\\main\\resources\\zone_one.png",
                 512, 512, true, true);
 
         testRock.load();

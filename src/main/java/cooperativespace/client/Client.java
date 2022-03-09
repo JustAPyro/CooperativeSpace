@@ -110,7 +110,7 @@ public class Client extends Application {
         JSONParser jsonParser = new JSONParser();
 
         // Try opening a file
-        try (FileReader reader = new FileReader("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\config.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/config.json")) {
 
             // Read JSON file
             Object obj = jsonParser.parse(reader);
