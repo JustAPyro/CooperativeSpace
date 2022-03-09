@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Represents the first zone
+ */
 public class ZoneOne implements WorldStage {
 
     Image background;
@@ -38,7 +41,7 @@ public class ZoneOne implements WorldStage {
 
     @Override
     public void update() {
-
+        // Update zone
     }
 
     @Override

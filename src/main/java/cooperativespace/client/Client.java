@@ -40,7 +40,7 @@ public class Client extends Application {
 
     // Variables for networking
     private NetworkClient networkClient;
-    private String ipAddress = "localhost";
+    private String ipAddress = "98.118.61.212";
     private int portNumber = 9875;
 
     WorldStage worldStage = new ZoneOne();
