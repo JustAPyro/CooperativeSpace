@@ -23,7 +23,7 @@ public class NetworkServer extends Thread {
 
     private DatagramSocket socket;
 
-    private ConcurrentHashMap<String, HashSet<Action>> clientPresses;
+    private ConcurrentHashMap<String, HashSet<Action>> clientPresses = new ConcurrentHashMap<>();
 
     public NetworkServer(int portNumber) {
         this.portNumber = portNumber;
@@ -63,13 +63,19 @@ public class NetworkServer extends Thread {
             final byte[] incomingBuffer = new byte[1];
             final DatagramPacket incomingPacket = new DatagramPacket(incomingBuffer, 1);
 
+            logger.info("Server buffers initialized");
+
             // Start the socket
             socket = new DatagramSocket(portNumber);
 
             // Synchronize hashset
             clientPresses = new ConcurrentHashMap<>();
 
+            logger.info("Server now listening...");
+
             while (true) {
+
+
 
                 // Receive incoming data
                 socket.receive(incomingPacket);
@@ -81,8 +87,22 @@ public class NetworkServer extends Thread {
                 // Construct the client ID using address:port (Should be unique)
                 String clientID = address.toString() + ":" + port;
 
-                // Get the hashset of actions for this client, otherwise create/insert a new hashset
-                HashSet<Action> actions = clientPresses.computeIfAbsent(clientID, k -> new HashSet<>());
+                // Create a new hashset to store the actions
+                HashSet<Action> actions;
+
+                // If we haven't encountered this client ID yet
+                if (!clientPresses.containsKey(clientID)) {
+
+                    // Log the new connection
+                    logger.info("New client connection: " + clientID);
+
+                    // Create a new hashset to store and insert it into the hashmap
+                    actions = new HashSet<>();
+                    clientPresses.put(clientID, actions);
+
+                }
+
+                actions = clientPresses.get(clientID);
 
                 // Get the byte representing the client inputs
                 byte inputByte = incomingPacket.getData()[0];
