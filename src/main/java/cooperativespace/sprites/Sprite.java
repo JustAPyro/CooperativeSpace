@@ -16,6 +16,13 @@ public abstract class Sprite implements Actor, Physics {
     private double xVelocity;
     private double yVelocity;
 
+    // - - - - - - - - - - Constructors - - - - - - - - - -
+
+    public Sprite(boolean isReal) {
+        if (isReal)
+            load();
+    }
+
     abstract public void load();
 
     public void update() {

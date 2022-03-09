@@ -7,6 +7,10 @@ public class SpaceRock extends Sprite{
 
     Image image;
 
+    public SpaceRock(boolean isReal) {
+        super(isReal);
+    }
+
     @Override
     public void load() {
         image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\rock.png");

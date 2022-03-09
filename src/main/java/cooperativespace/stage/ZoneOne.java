@@ -18,7 +18,6 @@ public class ZoneOne implements WorldStage {
 
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
-    SpaceRock testRock = new SpaceRock();
 
     @Override
     public void loadAssets() {
@@ -27,21 +26,19 @@ public class ZoneOne implements WorldStage {
         background = new Image("C:\\Users\\Luke\\Programming\\Java\\CooperativeSpace\\src\\main\\resources\\zone_one.png",
                 512, 512, true, true);
 
-        testRock.load();
-
     }
 
     @Override
     public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
         for (String playerID : actionMap.keySet()) {
-            PlayerSprite player = players.computeIfAbsent(playerID, k -> new PlayerSprite());
+            PlayerSprite player = players.computeIfAbsent(playerID, k -> new PlayerSprite(false));
             player.update(actionMap.get(playerID));
         }
     }
 
     @Override
     public void update() {
-        testRock.update();
+
     }
 
     @Override
@@ -81,7 +78,7 @@ public class ZoneOne implements WorldStage {
             byte[] playerPacket = new byte[6];
             System.arraycopy(packedState, 1+i*6, playerPacket, 0, 6);
 
-            PlayerSprite player = players.computeIfAbsent(String.valueOf(i), k -> new PlayerSprite());
+            PlayerSprite player = players.computeIfAbsent(String.valueOf(i), k -> new PlayerSprite(true));
             player.unpack(playerPacket);
         }
 

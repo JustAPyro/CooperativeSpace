@@ -27,15 +27,19 @@ public class PlayerSprite extends Sprite {
     // This component handles the physics, which includes updating game positions and checking for collisions
     private final PhysicsComponent physicsComponent = new PhysicsComponent();
 
+    // - - - - - - - - - - Constructors - - - - - - - - - -
+
+    public PlayerSprite(boolean isReal) {
+        super(isReal);
+    }
+
     // - - - - - Other - - - - -
 
     // The image that represents the sprite
     private Image image;
 
     // Constructor just calls load (Note that eventually load() should be called on a separate thread on loading screens
-    public PlayerSprite() {
-        load();
-    }
+
 
     // Updates the player sprite using the provided action/inputs
     public void update(HashSet<Action> actions) {
