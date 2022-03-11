@@ -26,7 +26,7 @@ public class ZoneOne implements WorldStage {
     public void loadAssets() {
 
         System.out.println(new File(".").getAbsolutePath());
-        background = new Image("C:\\Users\\Luke\\Programming\\Java\\CooperativeSpace\\src\\main\\resources\\zone_one.png",
+        background = new Image("file:src/main/resources/images/zone_one.png",
                 512, 512, true, true);
 
     }
@@ -47,7 +47,7 @@ public class ZoneOne implements WorldStage {
     @Override
     public byte[] packageState() {
 
-        byte playerCount = (byte) players.size();
+        byte playerCount = (byte) players.values().size();
         byte[] packagedState = new byte[(playerCount*6)+1+5];
 
         packagedState[0] = playerCount;
@@ -75,6 +75,7 @@ public class ZoneOne implements WorldStage {
     public void unpackState(byte[] packedState) {
 
         int playerCount = packedState[0];
+
 
         for (int i = 0; i < playerCount; i++) {
 

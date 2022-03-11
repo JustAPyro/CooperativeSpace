@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashSet;
 
 public class PlayerSprite extends Sprite {
@@ -59,8 +61,8 @@ public class PlayerSprite extends Sprite {
     @Override
     public void load() {
 
-        image = new Image("C:\\Users\\Luke\\Downloads\\CooperativeSpace-primary\\CooperativeSpace-primary\\src\\main\\resources\\images\\ship.png",
-                64, 64, true, true);
+        image = new Image("file:src/main/resources/images/ship.png", 64, 64, true, true);
+
     }
 
     // How to draw the player

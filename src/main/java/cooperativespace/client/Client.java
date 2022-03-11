@@ -44,8 +44,8 @@ public class Client extends Application {
 
     // Variables for networking
     private NetworkClient networkClient;
-    private String ipAddress = "98.118.61.212";
-    private int portNumber = 9875;
+    private static String ipAddress;
+    private static int portNumber;
 
     // TODO: The world stage should be loaded on commands from a message
     // The current worldStage (i.e. zone or loaded chunks)
@@ -53,6 +53,19 @@ public class Client extends Application {
 
     // The canvas we're drawing on
     Canvas canvas;
+
+    public static void main(String[] args) {
+
+        // Use the launch arguments to set the IP and port
+        if (args.length > 0) {
+            ipAddress = args[0];
+            portNumber = Integer.parseInt(args[1]);
+        }
+
+        // Then launch javafx
+        launch(args);
+
+    }
 
     // Entry point
     @Override
