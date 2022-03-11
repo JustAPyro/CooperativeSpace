@@ -31,4 +31,13 @@ public class UtilByte {
                 (byte) (a & 0xFF)
         };
     }
+
+
+    public static byte setBit(byte b, int position) {
+        return b |= 1 << position;
+    }
+
+    public static byte clearBit(byte b, int position) {
+        return b &= ~(1 << position);
+    }
 }
