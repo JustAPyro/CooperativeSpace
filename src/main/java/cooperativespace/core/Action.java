@@ -1,5 +1,8 @@
 package cooperativespace.core;
 
+/**
+ * This enum has an entry for each possible key-action that may be bound.
+ */
 public enum Action {
 
     // Movement actions
