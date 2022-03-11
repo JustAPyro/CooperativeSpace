@@ -23,10 +23,49 @@ public abstract class WorldStage {
 
     abstract public void update();
 
-    abstract public byte[] packageState();
-
-    abstract public void unpackState(byte[] packedState);
-
     abstract public void draw(Canvas canvas);
+
+    public byte[] packageState() {
+
+        byte playerCount = (byte) players.values().size();
+        byte[] packagedState = new byte[(playerCount*6)+1+5];
+
+        packagedState[0] = playerCount;
+        int index = 0;
+
+        int x =0; int y =0;
+        for (PlayerSprite player : players.values()) {
+            byte[] packedPlayer = player.pack();
+            System.arraycopy(packedPlayer, 0, packagedState, 1+index*6, packedPlayer.length);
+            index++;
+        }
+
+        /*
+        byte[] byteX = intToByteArray(x);
+        byte[] byteY = intToByteArray(y);
+
+        System.arraycopy(byteX, 0, packagedState, 0, byteX.length);
+        System.arraycopy(byteY, 0, packagedState, 4, byteY.length);
+*/
+
+        return packagedState;
+
+    }
+
+    public void unpackState(byte[] packedState) {
+
+        int playerCount = packedState[0];
+
+
+        for (int i = 0; i < playerCount; i++) {
+
+            byte[] playerPacket = new byte[6];
+            System.arraycopy(packedState, 1+i*6, playerPacket, 0, 6);
+
+            PlayerSprite player = players.computeIfAbsent(String.valueOf(i), k -> new PlayerSprite(true));
+            player.unpack(playerPacket);
+        }
+
+    }
 
 }
