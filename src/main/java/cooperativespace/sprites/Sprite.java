@@ -23,6 +23,24 @@ public abstract class Sprite implements Actor, Physics {
             load();
     }
 
+    /**
+     * Constructs a sprite at a specified location
+     * @param isReal If true this sprite is realized and will call load()
+     * @param posX The x position of the sprite
+     * @param posY The y position of the sprite
+     */
+    public Sprite(boolean isReal, double posX, double posY) {
+
+        // If this is a realized sprite, load the assets
+        if (isReal)
+            load();
+
+        // Set the provided position
+        this.posX = posX;
+        this.posY = posY;
+
+    }
+
     abstract public void load();
 
     public void update() {

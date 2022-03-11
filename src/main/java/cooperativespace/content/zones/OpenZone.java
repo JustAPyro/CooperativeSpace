@@ -16,11 +16,6 @@ public class OpenZone extends WorldStage {
     }
 
     @Override
-    public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void update() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

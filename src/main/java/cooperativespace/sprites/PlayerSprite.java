@@ -35,6 +35,10 @@ public class PlayerSprite extends Sprite {
         super(isReal);
     }
 
+    public PlayerSprite(boolean isReal, int x, int y) {
+        super(isReal, x, y);
+    }
+
     // - - - - - Other - - - - -
 
     // The image that represents the sprite

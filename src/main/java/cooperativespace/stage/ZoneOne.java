@@ -1,16 +1,9 @@
 package cooperativespace.stage;
 
 import cooperativespace.UI.HUD;
-import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
-import cooperativespace.sprites.SpaceRock;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Represents the first zone
@@ -23,7 +16,7 @@ public class ZoneOne extends WorldStage {
     @Override
     public void loadAssets() {
 
-        System.out.println(new File(".").getAbsolutePath());
+
         background = new Image("file:src/main/resources/images/zone_one.png",
                 512, 512, true, true);
 
@@ -92,14 +85,5 @@ public class ZoneOne extends WorldStage {
         HUD.draw(canvas);
 
     }
-
-
-
-    private void packageInsert(byte[] b, int position, int toInsert) {
-        for (int i = 0; i  < 4; i++) {
-            b[i + position] = (byte) (toInsert >> 24-(i*8));
-        }
-    }
-
 
 }
