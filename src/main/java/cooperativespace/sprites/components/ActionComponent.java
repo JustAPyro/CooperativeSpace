@@ -24,6 +24,10 @@ public class ActionComponent {
             command.execute(this);
     }
 
+    public void ability(int abilityNumber)  {
+
+    }
+
     public void accelerate() {
         actor.modifyXVelocity(ACCELERATION * sin(actor.getRotation()));
         actor.modifyYVelocity(-1 * ACCELERATION * cos(actor.getRotation()));

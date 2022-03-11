@@ -1,23 +1,32 @@
 package cooperativespace.stage;
 
 import cooperativespace.core.Action;
+import cooperativespace.sprites.PlayerSprite;
 import javafx.scene.canvas.Canvas;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-public interface WorldStage {
+public abstract class WorldStage {
 
-    public void loadAssets();
+    HashMap<String, PlayerSprite> players = new HashMap<>();
 
-    public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap);
+    abstract public void loadAssets();
 
-    public void update();
+    public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
+        for (String playerID : actionMap.keySet()) {
+            PlayerSprite player = players.computeIfAbsent(playerID, k -> new PlayerSprite(false));
+            player.update(actionMap.get(playerID));
+        }
+    }
 
-    public byte[] packageState();
+    abstract public void update();
 
-    public void unpackState(byte[] packedState);
+    abstract public byte[] packageState();
 
-    public void draw(Canvas canvas);
+    abstract public void unpackState(byte[] packedState);
+
+    abstract public void draw(Canvas canvas);
 
 }

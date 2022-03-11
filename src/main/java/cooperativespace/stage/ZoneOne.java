@@ -15,11 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Represents the first zone
  */
-public class ZoneOne implements WorldStage {
+public class ZoneOne extends WorldStage {
 
     Image background;
-
-    HashMap<String, PlayerSprite> players = new HashMap<>();
 
 
     @Override
@@ -29,14 +27,6 @@ public class ZoneOne implements WorldStage {
         background = new Image("file:src/main/resources/images/zone_one.png",
                 512, 512, true, true);
 
-    }
-
-    @Override
-    public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
-        for (String playerID : actionMap.keySet()) {
-            PlayerSprite player = players.computeIfAbsent(playerID, k -> new PlayerSprite(false));
-            player.update(actionMap.get(playerID));
-        }
     }
 
     @Override
