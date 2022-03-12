@@ -23,7 +23,15 @@ public abstract class WorldStage {
 
     abstract public void update();
 
-    abstract public void draw(Canvas canvas);
+    abstract protected void draw(Canvas canvas);
+
+    public void drawWorld(Canvas canvas) {
+
+        draw(canvas);
+
+        for (PlayerSprite player : players.values())
+            player.draw(canvas);
+    }
 
     public byte[] packageState() {
 

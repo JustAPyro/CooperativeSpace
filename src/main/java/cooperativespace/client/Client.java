@@ -115,7 +115,7 @@ public class Client extends Application {
 
                     // Unpack the data and draw the new world stage.
                     worldStage.unpackState(networkClient.getReceivedData());
-                    worldStage.draw(canvas);
+                    worldStage.drawWorld(canvas);
 
                 }
 

@@ -24,7 +24,7 @@ public class ZoneOne extends WorldStage {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+
     }
 
 
@@ -35,8 +35,7 @@ public class ZoneOne extends WorldStage {
         canvas.getGraphicsContext2D().drawImage(background, 0, 512);
         canvas.getGraphicsContext2D().drawImage(background, 512, 512);
 
-        for (PlayerSprite player : players.values())
-            player.draw(canvas);
+
 
         HUD.draw(canvas);
 
