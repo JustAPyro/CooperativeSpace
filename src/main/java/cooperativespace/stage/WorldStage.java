@@ -3,6 +3,8 @@ package cooperativespace.stage;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,7 +14,15 @@ public abstract class WorldStage {
 
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
-    abstract public void loadAssets();
+    Image background;
+
+    protected void setBackground(String path) {
+        background = new Image(path, 512, 512, true, true);
+    }
+
+    public void loadAssets() {}
+
+
 
     public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
         for (String playerID : actionMap.keySet()) {
@@ -21,11 +31,17 @@ public abstract class WorldStage {
         }
     }
 
-    abstract public void update();
+    public void update() {}
 
-    abstract protected void draw(Canvas canvas);
+    protected void draw(Canvas canvas) {}
 
     public void drawWorld(Canvas canvas) {
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(background, 0, 0);
+        gc.drawImage(background, 512, 0);
+        gc.drawImage(background, 0, 512);
+        gc.drawImage(background, 512, 512);
 
         draw(canvas);
 

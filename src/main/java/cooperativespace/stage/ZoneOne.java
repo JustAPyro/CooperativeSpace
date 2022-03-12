@@ -17,7 +17,7 @@ public class ZoneOne extends WorldStage {
     public void loadAssets() {
 
 
-        background = new Image("file:src/main/resources/images/zone_one.png",
+        background = new Image("file:src/main/resources/images/openworld.png",
                 512, 512, true, true);
 
     }

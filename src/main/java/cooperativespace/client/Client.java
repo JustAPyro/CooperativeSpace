@@ -1,5 +1,6 @@
 package cooperativespace.client;
 
+import cooperativespace.content.zones.OpenZone;
 import cooperativespace.core.Action;
 import cooperativespace.core.CoreGame;
 import cooperativespace.network.NetworkClient;
@@ -49,7 +50,7 @@ public class Client extends Application {
 
     // TODO: The world stage should be loaded on commands from a message
     // The current worldStage (i.e. zone or loaded chunks)
-    WorldStage worldStage = new ZoneOne();
+    WorldStage worldStage = new OpenZone();
 
     // The canvas we're drawing on
     Canvas canvas;
