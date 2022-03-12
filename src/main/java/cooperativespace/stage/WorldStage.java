@@ -1,11 +1,14 @@
 package cooperativespace.stage;
 
+import cooperativespace.GameObject;
+import cooperativespace.content.planets.Planet;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,10 +17,20 @@ public abstract class WorldStage {
 
     HashMap<String, PlayerSprite> players = new HashMap<>();
 
+    ArrayList<Planet> planets = new ArrayList<Planet>();
+
     Image background;
+
+    // - - - - - - - - - - Sandbox methods - - - - - - - - - -
 
     protected void setBackground(String path) {
         background = new Image(path, 512, 512, true, true);
+    }
+
+    protected void spawnPlanet(Planet planet) {
+
+        planets.add(planet);
+
     }
 
     public void loadAssets() {}
@@ -44,6 +57,10 @@ public abstract class WorldStage {
         gc.drawImage(background, 512, 512);
 
         draw(canvas);
+
+        for (Planet planet : planets) {
+            planet.draw(canvas);
+        }
 
         for (PlayerSprite player : players.values())
             player.draw(canvas);
