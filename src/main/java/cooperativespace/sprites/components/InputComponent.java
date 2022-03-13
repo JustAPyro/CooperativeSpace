@@ -18,7 +18,7 @@ public class InputComponent {
     RotateRightCommand right = new RotateRightCommand();
     RotateLeftCommand left = new RotateLeftCommand();
 
-    public HashSet<Command> update(PlayerSprite player, HashSet<Action> actions) {
+    public HashSet<Command> update(HashSet<Action> actions) {
 
         // Start by clearing the command set
         commands.clear();

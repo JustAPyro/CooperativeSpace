@@ -51,7 +51,7 @@ public class PlayerSprite extends Sprite {
     public void update(HashSet<Action> actions) {
 
         // Process inputs and get commands
-        HashSet<Command> commands = inputComponent.update(this, actions);
+        HashSet<Command> commands = inputComponent.update(actions);
 
         // update our action component so it can execute commands
         actionComponent.update(commands);
