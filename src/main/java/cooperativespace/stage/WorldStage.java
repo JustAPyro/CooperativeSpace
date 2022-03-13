@@ -44,7 +44,10 @@ public abstract class WorldStage {
         }
     }
 
-    public void update() {}
+    public void update() {
+        for (Planet planet : planets)
+            planet.update();
+    }
 
     protected void draw(Canvas canvas) {}
 

@@ -26,9 +26,27 @@ public class Planet implements GameObject, Collider {
         this.posY = posY;
     }
 
+    public void update() {
+
+    }
+
     public void draw(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(image, posX, posY);
     }
 
 
+    @Override
+    public double getX() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getY() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
