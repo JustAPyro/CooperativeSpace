@@ -11,6 +11,10 @@ public class ColliderComponent {
         allColliderComponents.add(collider);
     }
 
+    public void update(Collider parent) {
+        System.out.println("lol NOT checking for collisions");
+    }
+
 
 
 

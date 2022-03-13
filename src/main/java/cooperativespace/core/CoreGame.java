@@ -48,7 +48,7 @@ public class CoreGame implements Runnable {
     public void onUpdate() {
 
         // Update the world stage
-        worldStage.updatePlayers(server.getActionMap());
+        worldStage.update(server.getActionMap());
 
     }
 

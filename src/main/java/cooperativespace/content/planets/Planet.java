@@ -18,8 +18,6 @@ public class Planet implements GameObject, Collider {
     private double posY;
     private double rot;
 
-    PhysicsComponent physics = new PhysicsComponent();
-
     public Planet(String pathToImage, double posX, double posY, int size) {
         image = new Image(pathToImage, size, size, true, true);
         this.posX = posX;
@@ -27,7 +25,7 @@ public class Planet implements GameObject, Collider {
     }
 
     public void update() {
-
+        collider.update(this);
     }
 
     public void draw(Canvas canvas) {

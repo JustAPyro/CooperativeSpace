@@ -1,6 +1,5 @@
 package cooperativespace.stage;
 
-import cooperativespace.GameObject;
 import cooperativespace.content.planets.Planet;
 import cooperativespace.core.Action;
 import cooperativespace.sprites.PlayerSprite;
@@ -37,14 +36,12 @@ public abstract class WorldStage {
 
 
 
-    public void updatePlayers(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
+    public void update(ConcurrentHashMap<String, HashSet<Action>> actionMap) {
         for (String playerID : actionMap.keySet()) {
             PlayerSprite player = players.computeIfAbsent(playerID, k -> new PlayerSprite(false));
             player.update(actionMap.get(playerID));
         }
-    }
 
-    public void update() {
         for (Planet planet : planets)
             planet.update();
     }

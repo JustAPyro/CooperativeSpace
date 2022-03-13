@@ -22,11 +22,6 @@ public class ZoneOne extends WorldStage {
 
     }
 
-    @Override
-    public void update() {
-
-    }
-
 
     public void draw(Canvas canvas) {
 
