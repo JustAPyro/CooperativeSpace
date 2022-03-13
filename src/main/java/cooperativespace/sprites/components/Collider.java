@@ -2,10 +2,12 @@ package cooperativespace.sprites.components;
 
 public interface Collider {
 
-    double getX();
+    double getXPosition();
 
-    double getY();
+    double getYPosition();
 
-    double getSize();
+    double getColliderSphereSize();
+
+    boolean isReal();
 
 }

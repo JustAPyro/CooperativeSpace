@@ -2,6 +2,7 @@ package cooperativespace.sprites;
 
 import cooperativespace.sprites.commands.Command;
 import cooperativespace.sprites.components.ActionComponent;
+import cooperativespace.sprites.components.ColliderComponent;
 import cooperativespace.sprites.components.InputComponent;
 import cooperativespace.sprites.components.PhysicsComponent;
 import cooperativespace.core.Action;
@@ -16,7 +17,7 @@ import java.util.HashSet;
 
 public class PlayerSprite extends Sprite {
 
-    // - - - - - - - - - - Instance Methods - - - - - - - - - -
+    // - - - - - - - - - - Instance Variables - - - - - - - - - -
 
     // - - - - - Components - - - - -
 
@@ -28,6 +29,8 @@ public class PlayerSprite extends Sprite {
 
     // This component handles the physics, which includes updating game positions and checking for collisions
     private final PhysicsComponent physicsComponent = new PhysicsComponent();
+
+    private final ColliderComponent colliderComponent = new ColliderComponent(this);
 
     // - - - - - - - - - - Constructors - - - - - - - - - -
 
@@ -65,7 +68,7 @@ public class PlayerSprite extends Sprite {
     @Override
     public void load() {
 
-        image = new Image("file:src/main/resources/images/ship.png", 64, 64, true, true);
+        image = new Image("file:src/main/resources/images/ship.png", size, size, true, true);
 
     }
 

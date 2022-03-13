@@ -1,5 +1,7 @@
 package cooperativespace.sprites.components;
 
+import cooperativespace.utilities.UtilMath;
+
 import java.util.ArrayList;
 
 public class ColliderComponent {
@@ -9,13 +11,32 @@ public class ColliderComponent {
 
     public ColliderComponent(Collider collider) {
         allColliderComponents.add(collider);
+
     }
 
     public void update(Collider parent) {
-        System.out.println("lol NOT checking for collisions");
+
+        // Check for collision with any other Collider Component
+        for (Collider collider : allColliderComponents) {
+
+            if (collider == parent || collider.isReal()) {
+                continue;
+            }
+
+            // Calculate the distance between the two points
+            double distance = UtilMath.distanceBetweenPoints(
+                    parent.getXPosition(), parent.getYPosition(),
+                    collider.getXPosition(), collider.getYPosition()
+            );
+
+            // If distance is less than the sphere size of each, it's a collision
+            if (distance < parent.getColliderSphereSize() + collider.getColliderSphereSize()) {
+                System.out.println("Colided");
+            }
+
+
+        }
+
     }
-
-
-
 
 }

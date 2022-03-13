@@ -1,10 +1,11 @@
 package cooperativespace.sprites;
 
 import cooperativespace.sprites.components.Actor;
+import cooperativespace.sprites.components.Collider;
 import cooperativespace.sprites.components.Physics;
 import javafx.scene.canvas.Canvas;
 
-public abstract class Sprite implements Actor, Physics {
+public abstract class Sprite implements Actor, Physics, Collider {
 
     // - - - - - - - - - - Instance Variables - - - - - - - - - -
     // All sprites contain:
@@ -15,6 +16,9 @@ public abstract class Sprite implements Actor, Physics {
 
     private double xVelocity;
     private double yVelocity;
+
+    protected double size = 64;
+    private boolean isReal;
 
     // - - - - - - - - - - Constructors - - - - - - - - - -
 
@@ -126,6 +130,20 @@ public abstract class Sprite implements Actor, Physics {
 
     public void modifyYPosition(double increment) {
         posY += increment;
+    }
+
+    // - - - - - - - - - - COLLIDERS - - - - - - - - - -
+
+    // GetXPosition
+
+    // GetYPosition
+
+    public double getColliderSphereSize() {
+        return size/2;
+    }
+
+    public boolean isReal() {
+        return isReal;
     }
 
 }

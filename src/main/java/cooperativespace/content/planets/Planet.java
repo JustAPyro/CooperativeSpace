@@ -16,13 +16,18 @@ public class Planet implements GameObject, Collider {
 
     private double posX;
     private double posY;
-    private double rot;
+    private double size;
+
+
+    private boolean isReal;
 
     public Planet(boolean isReal, String pathToImage, double posX, double posY, int size) {
         if (isReal)
             image = new Image(pathToImage, size, size, true, true);
         this.posX = posX;
         this.posY = posY;
+        this.size = size;
+        this.isReal = isReal;
     }
 
     public void update() {
@@ -35,17 +40,22 @@ public class Planet implements GameObject, Collider {
 
 
     @Override
-    public double getX() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public double getXPosition() {
+        return posX;
     }
 
     @Override
-    public double getY() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public double getYPosition() {
+        return posY;
     }
 
     @Override
-    public double getSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public double getColliderSphereSize() {
+        return size/2;
+    }
+
+    @Override
+    public boolean isReal() {
+        return isReal;
     }
 }
