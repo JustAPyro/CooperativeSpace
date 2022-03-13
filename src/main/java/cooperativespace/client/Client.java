@@ -50,7 +50,7 @@ public class Client extends Application {
 
     // TODO: The world stage should be loaded on commands from a message
     // The current worldStage (i.e. zone or loaded chunks)
-    WorldStage worldStage = new OpenZone();
+    WorldStage worldStage = new OpenZone(true);
 
     // The canvas we're drawing on
     Canvas canvas;

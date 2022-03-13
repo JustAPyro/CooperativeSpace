@@ -18,8 +18,9 @@ public class Planet implements GameObject, Collider {
     private double posY;
     private double rot;
 
-    public Planet(String pathToImage, double posX, double posY, int size) {
-        image = new Image(pathToImage, size, size, true, true);
+    public Planet(boolean isReal, String pathToImage, double posX, double posY, int size) {
+        if (isReal)
+            image = new Image(pathToImage, size, size, true, true);
         this.posX = posX;
         this.posY = posY;
     }

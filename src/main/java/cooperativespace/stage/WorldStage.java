@@ -22,8 +22,9 @@ public abstract class WorldStage {
 
     // - - - - - - - - - - Sandbox methods - - - - - - - - - -
 
-    protected void setBackground(String path) {
-        background = new Image(path, 512, 512, true, true);
+    protected void setBackground(boolean isReal, String path) {
+        if (isReal)
+            background = new Image(path, 512, 512, true, true);
     }
 
     protected void spawnPlanet(Planet planet) {

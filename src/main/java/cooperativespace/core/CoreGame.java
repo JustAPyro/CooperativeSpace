@@ -1,5 +1,6 @@
 package cooperativespace.core;
 
+import cooperativespace.content.zones.OpenZone;
 import cooperativespace.network.NetworkServer;
 import cooperativespace.stage.WorldStage;
 import cooperativespace.stage.ZoneOne;
@@ -22,7 +23,7 @@ public class CoreGame implements Runnable {
     // - - - - - - - - - - Instance Variables - - - - - - - - - -
 
     // this interface object holds the state information
-    WorldStage worldStage = new ZoneOne();
+    WorldStage worldStage = new OpenZone(false);
 
     // The server managing network communication
     NetworkServer server;
