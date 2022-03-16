@@ -115,7 +115,6 @@ public class PlayerSprite extends Sprite {
         System.arraycopy(playerPacket, 2, bY, 0, 2);
         System.arraycopy(playerPacket, 4, bRot, 0, 2);
 
-        // TODO : FIX THIS AT SOME POINT< AXIS ARE MESSED UP
         setXPosition(UtilByte.byteArrayToShort(bX));
         setYPosition(UtilByte.byteArrayToShort(bY));
         setRotation(UtilByte.byteArrayToShort(bRot));
