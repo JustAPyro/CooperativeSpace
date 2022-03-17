@@ -1,6 +1,7 @@
 package cooperativespace.sprites.components;
 
 import cooperativespace.utilities.UtilMath;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 
@@ -9,12 +10,21 @@ public class ColliderComponent {
     // This determines if colliders should be drawn
     public final boolean showCollider = true;
 
+    // The parent of this specific collider
+    private Collider parent;
+
     // This array tracks all colliders that are created, for object collision detection
     private static final ArrayList<Collider> allColliderComponents = new ArrayList<Collider>();
 
     public ColliderComponent(Collider collider) {
         allColliderComponents.add(collider);
+        parent = collider;
+    }
 
+    public void drawCollider(GraphicsContext gc) {
+        gc.save();
+        gc.setStroke(Color.RED);
+        gc.strokeOval(parent)
     }
 
 
