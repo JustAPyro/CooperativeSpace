@@ -2,6 +2,7 @@ package cooperativespace.sprites.components;
 
 import cooperativespace.utilities.UtilMath;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -17,14 +18,22 @@ public class ColliderComponent {
     private static final ArrayList<Collider> allColliderComponents = new ArrayList<Collider>();
 
     public ColliderComponent(Collider collider) {
+
+        // Add the collider to the list of all colliders in world
         allColliderComponents.add(collider);
+
+        // Save the parent of this specific collider
         parent = collider;
+
     }
 
     public void drawCollider(GraphicsContext gc) {
         gc.save();
         gc.setStroke(Color.RED);
-        gc.strokeOval(parent)
+        gc.strokeOval(parent.getXPosition()-(parent.getColliderSphereSize()),
+                parent.getYPosition()-(parent.getColliderSphereSize()),
+                parent.getColliderSphereSize()*2, parent.getColliderSphereSize()*2);
+        gc.restore();
     }
 
 

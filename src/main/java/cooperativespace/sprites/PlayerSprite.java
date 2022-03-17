@@ -87,7 +87,7 @@ public class PlayerSprite extends Sprite {
         gc.restore();
 
         if (colliderComponent.showCollider)
-            colliderComponent.drawCollider();
+            colliderComponent.drawCollider(gc);
     }
 
     // IMPORTANT : This is how the server packs the player information to send to client
