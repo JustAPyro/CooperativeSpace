@@ -85,6 +85,9 @@ public class PlayerSprite extends Sprite {
         //
         gc.drawImage(image, 0, 0);
         gc.restore();
+
+        if (colliderComponent.showCollider)
+            colliderComponent.drawCollider();
     }
 
     // IMPORTANT : This is how the server packs the player information to send to client
