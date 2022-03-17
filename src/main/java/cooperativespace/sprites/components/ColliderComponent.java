@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class ColliderComponent {
 
+    // This determines if colliders should be drawn
+    public final boolean showCollider = true;
+
     // This array tracks all colliders that are created, for object collision detection
     private static final ArrayList<Collider> allColliderComponents = new ArrayList<Collider>();
 
@@ -13,6 +16,7 @@ public class ColliderComponent {
         allColliderComponents.add(collider);
 
     }
+
 
     public void update(Collider parent) {
 

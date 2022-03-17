@@ -36,6 +36,10 @@ public class Planet implements GameObject, Collider {
 
     public void draw(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(image, posX, posY);
+
+        if (collider.showCollider)
+            canvas.getGraphicsContext2D().strokeOval(posX - (size/2), posY - (size/2), size, size);
+
     }
 
 
