@@ -78,7 +78,7 @@ public class PlayerSprite extends Sprite {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.save();
 
-        gc.translate(getXPosition()+image.getWidth()/2, getYPosition()+image.getWidth()/2);
+        gc.translate(getXPosition(), getYPosition());
         gc.rotate(getRotation());
         gc.translate(-image.getHeight()/2, -image.getWidth()/2);
 
