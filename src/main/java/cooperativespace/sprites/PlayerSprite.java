@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class PlayerSprite extends Sprite {
