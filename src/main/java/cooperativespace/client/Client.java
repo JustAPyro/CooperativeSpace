@@ -1,12 +1,10 @@
 package cooperativespace.client;
 
-import cooperativespace.content.zones.OpenZone;
+import cooperativespace.UI.menu.MenuManager;
 import cooperativespace.core.Action;
 import cooperativespace.core.CoreGame;
 import cooperativespace.network.NetworkClient;
 
-import cooperativespace.stage.WorldStage;
-import cooperativespace.stage.ZoneOne;
 import cooperativespace.utilities.UtilByte;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -50,8 +48,6 @@ public class Client extends Application {
 
     // TODO: The world stage should be loaded on commands from a message
     // The current worldStage (i.e. zone or loaded chunks)
-    WorldStage worldStage = new OpenZone(true);
-
     // The canvas we're drawing on
     Canvas canvas;
 
@@ -72,8 +68,7 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) {
 
-        // Set the title
-        stage.setTitle("Cooperative Space");
+
 
         // Add the main canvas
         VBox box = new VBox();
@@ -88,42 +83,31 @@ public class Client extends Application {
         scene.setOnKeyPressed(e -> keysPressed.add(e.getCode()));
         scene.setOnKeyReleased(e -> keysPressed.remove(e.getCode()));
 
-        // Create a network
-        networkClient = new NetworkClient(ipAddress, portNumber);
+        // Get the graphics context to draw with
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Load the stage
-        worldStage.loadAssets();
+        // Create a menu manager and set it to active since the game will open into a menu
+        MenuManager menuManager = new MenuManager(canvas, "src/main/resources/menus.json");
+        menuManager.activate();
+        menuManager.navigate()
+
 
         // Game loop on the clint side (note this is locked at 60fps)
         AnimationTimer clock = new AnimationTimer() {
             @Override
             public void handle(long l) {
-
-                // Get the graphics context to draw with
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-
                 // Clear the canvas
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                // package the current client-side inputs...
-                byte[] keyPackage = packageInputs(keysPressed);
+                if (menuManager.isActive())
+                    menuManager.draw();
 
-                // ... Then use the client network to push those inputs to server
-                networkClient.push(keyPackage);
-
-                // Then, if our network-side client has data
-                if (networkClient.hasData()) {
-
-                    // Unpack the data and draw the new world stage.
-                    worldStage.unpackState(networkClient.getReceivedData());
-                    worldStage.drawWorld(canvas);
-
-                }
 
             }
         }; clock.start();
 
-        // Set the scene and show the stage
+        // Set the scene and title then show the stage
+        stage.setTitle("Cooperative Space");
         stage.setScene(scene);
         stage.show();
 

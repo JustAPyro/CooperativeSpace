@@ -1,0 +1,14 @@
+{
+  "main": {
+    "components": [
+      {
+        "type": "button",
+        "text": "Play",
+        "location": "center"
+      }
+    ]
+  },
+  "lobby": {
+
+  }
+}
