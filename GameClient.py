@@ -56,7 +56,7 @@ class GameClient:
                 x = int(player[0])
                 y = int(player[1])
                 r = int(player[2])
-                Player().draw(self.screen, (x, y), r)
+                Player().draw(self.screen, (x, y, r))
 
             # flip() the display to put your work on screen
             pygame.display.flip()

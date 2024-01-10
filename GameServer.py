@@ -4,6 +4,7 @@ import logging
 import sys
 
 import CSN
+from CSN import clientside
 from Game import Player
 
 logging.basicConfig(level=logging.INFO)
@@ -51,7 +52,7 @@ class GameServer:
             self.clients[addr].update_inputs(
                 CSN.byte_to_bools(data, 4))
 
-            pickle_game = pickle.dumps([(*cm.player.position, cm.player.heading) for cm in self.clients.values()])
+            pickle_game = pickle.dumps([cm.player.position for cm in self.clients.values()])
             sock.sendto(pickle_game, addr)
 
 

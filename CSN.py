@@ -21,4 +21,5 @@ def byte_to_bools(byte: bytes, length) -> list[bool]:
 # keys = byte_to_bools(keybyte, 4)
 # print(f'And we can efficiently reverse the process: {keys}')
 
-
+def clientside():
+    pass
